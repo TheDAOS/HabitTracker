@@ -35,8 +35,9 @@ html {
     margin: 0;
     padding: 0;
     height: 100%;
+    min-height: 100vh;
     font-family: var(--font-family);
-    background-color: var(--clr-dark-a0);
+    background-color: var(--clr-surface-a0);
     color: var(--clr-light-a0);
 }
 
@@ -80,17 +81,24 @@ nav>button {
     font-size: 18px;
 }
 
+nav>button:hover {
+    text-decoration: underline;
+    text-decoration-color: var(--clr-primary-a0);
+}
+
 button {
     background-color: var(--clr-primary-a0);
     border: none;
     padding: 10px;
-    border-radius: 5px;
-    color: var(--clr-dark-a0);
+    border-radius: 8px;
+    color: var(--clr-surface-a0);
+    font-weight: bold;
     cursor: pointer;
 }
 
 button:hover {
     text-decoration: underline;
+    text-decoration-color: var(--clr-surface-a0);
 }
 
 button:focus {
@@ -137,8 +145,71 @@ footer {
     background-color: var(--clr-surface-a0);
     padding: 10px;
     text-align: center;
-    /* position: relative; */
-    /* bottom: 0; */
+    /* position: relative;
+    bottom: 0; */
+    position: sticky;
+    top: 100%;
     width: 100%;
     color: var(--clr-light-a0);
+}
+
+.hidden {
+    display: none;
+}
+
+.login,
+.register {
+    padding-top: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* justify-content: center; */
+    height: 100vh;
+}
+
+.login-card,
+.register-card {
+    display: flex;
+    flex-direction: column;
+
+    width: 90%;
+    max-width: 600px;
+
+    background-color: var(--clr-surface-a20);
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+.login-card>*,
+.register-card>* {
+    margin: 0;
+    margin-bottom: 10px;
+}
+
+.login-card h1,
+.register-card h1 {
+    margin-bottom: 20px;
+}
+
+.login-card input,
+.register-card input {
+    /* padding: 5px; */
+    padding: 10px;
+    border: 1px solid var(--clr-surface-a30);
+    border-radius: 8px;
+}
+
+a {
+    color: var(--clr-primary-a0);
+    text-decoration: none;
+}
+
+a:hover {
+    color: var(--clr-primary-a50);
+    text-decoration: underline;
+}
+
+a:visited {
+    color: var(--clr-primary-a10);
 }
