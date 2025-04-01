@@ -154,9 +154,10 @@ footer {
     color: var(--clr-light-a0);
 }
 
-.hidden {
+/* .hidden {
     display: none;
-}
+
+} */
 
 .login,
 .register {

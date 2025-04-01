@@ -64,7 +64,7 @@ window.loginUser = function (event) {
 window.logoutUser = function () {
     signOut(auth).then(() => {
         // Sign-out successful.
-        alert("User logged out successfully");
+        // alert("User logged out successfully");
         console.log("User logged out successfully");
         // window.location.href = "login.html";
       }).catch((error) => {
@@ -87,4 +87,56 @@ window.checkUserLoggedIn = function () {
             window.location.href = 'login.html';
         }
     });
+}
+
+window.navigation = {
+    dashboard: document.getElementById('dashboard'),
+    viewHabits: document.getElementById('viewHabits'),
+    community: document.getElementById('community'),
+    challenges: document.getElementById('challenges'),
+    addHabit: document.getElementById('addHabit'),
+    profile: document.getElementById('profile'),
+    notifications: document.getElementById('notifications'),
+    hideAll: function () {
+        this.dashboard.style.display = "none";
+        this.viewHabits.style.display = "none";
+        this.community.style.display = "none";
+        this.challenges.style.display = "none";
+        this.addHabit.style.display = "none";
+        this.profile.style.display = "none";
+        this.notifications.style.display = "none";
+    },
+    showDashboard: function () {
+        this.hideAll();
+        this.dashboard.style.display = "";
+    },
+    showViewHabits: function () {
+        this.hideAll();
+        this.viewHabits.style.display = "";
+    },
+    showCommunity: function () {
+        this.hideAll();
+        this.community.style.display = "";
+    },
+    showChallenges: function () {
+        this.hideAll();
+        this.challenges.style.display = "";
+    },
+    showAddHabit: function () {
+        this.hideAll();
+        this.addHabit.style.display = "";
+    },
+    showProfile: function () {
+        this.hideAll();
+        this.profile.style.display = "";
+    },
+    showNotifications: function () {
+        this.hideAll();
+        this.notifications.style.display = "";
+    }
+}
+
+window.indexLoad = function () {
+    checkUserLoggedIn()
+    navigation.showDashboard()
 }

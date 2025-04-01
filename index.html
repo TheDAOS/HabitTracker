@@ -9,29 +9,52 @@
     <link rel="icon" type="image/png" sizes="32x32" href="favicon_io/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="favicon_io/favicon-16x16.png">
     <link rel="manifest" href="favicon_io/site.webmanifest">
-    
+
     <link rel="stylesheet" href="style.css">
 </head>
 
-<body onload="checkUserLoggedIn()">
+<body onload="indexLoad()">
     <header>
         <a href="">Habit Tracker</a>
 
         <nav>
-            <button type="button">Dashboard</button>
-            <button type="button">View Habits</button>
-            <button type="button">Community</button>
-            <button type="button">Challenges</button>
-            <button type="button">Add Habit</button>
-            <button type="button">Profile</button>
-            <button type="button">Notifications</button>
-            <button type="button">Help</button>
+            <button type="button" onclick="navigation.showDashboard()">Dashboard</button>
+            <button type="button" onclick="navigation.showViewHabits()">View Habits</button>
+            <button type="button" onclick="navigation.showCommunity()">Community</button>
+            <button type="button" onclick="navigation.showChallenges()">Challenges</button>
+            <button type="button" onclick="navigation.showAddHabit()">Add Habit</button>
+            <button type="button" onclick="navigation.showProfile()">Profile</button>
+            <button type="button" onclick="navigation.showNotifications()">Notifications</button>
+            <button type="button" onclick="navigation.hideAll()">Help</button>
             <button type="button" onclick="logoutUser()">Logout</button>
         </nav>
     </header>
 
     <main>
-        <section class="habit-form hidden">
+        <section id="dashboard" class="habit-progress hidden">
+            <h2>Habit Progress</h2>
+            <div id="progress-chart"></div>
+            <button id="export-progress">Export Progress</button>
+        </section>
+
+        <section id="viewHabits" class="habits-list hidden">
+            <h2>Your Habits</h2>
+            <ul id="habits-list"></ul>
+        </section>
+
+        <section id="community" class="community hidden">
+            <h2>Community</h2>
+            <div id="community-posts"></div>
+            <button id="create-post">Create Post</button>
+        </section>
+
+        <section id="challenges" class="challenges hidden">
+            <h2>Challenges</h2>
+            <div id="challenges-list"></div>
+            <button id="join-challenge">Join Challenge</button>
+        </section>
+
+        <section id="addHabit" class="habit-form hidden">
             <h2>Add a New Habit</h2>
             <form id="habit-form">
                 <label for="habit-name">Habit Name:</label>
@@ -48,27 +71,16 @@
             </form>
         </section>
 
-        <section class="habits-list hidden">
-            <h2>Your Habits</h2>
-            <ul id="habits-list"></ul>
+        <section id="profile" class="profile hidden">
+            <h2>Your Profile</h2>
+            <div id="user-profile"></div>
+            <button id="edit-profile">Edit Profile</button>
         </section>
 
-        <section class="habit-progress hidden">
-            <h2>Habit Progress</h2>
-            <div id="progress-chart"></div>
-            <button id="export-progress">Export Progress</button>
-        </section>
-
-        <section class="community hidden">
-            <h2>Community</h2>
-            <div id="community-posts"></div>
-            <button id="create-post">Create Post</button>
-        </section>
-
-        <section class="challenges hidden">
-            <h2>Challenges</h2>
-            <div id="challenges-list"></div>
-            <button id="join-challenge">Join Challenge</button>
+        <section id="notifications" class="notifications hidden">
+            <h2>Notifications</h2>
+            <div id="notifications-list"></div>
+            <button id="mark-all-read">Mark All as Read</button>
         </section>
     </main>
 
