@@ -1,0 +1,119 @@
+:root {
+    --primary-color: darkolivegreen;
+    --secondary-color: #1c1e22;
+    --accent-color: #ff6347;
+    --text-color: #ffffff;
+    --background-color: black;
+    --font-family: Arial, sans-serif;
+}
+
+body,
+html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font-family: var(--font-family);
+    background-color: var(--background-color);
+    color: var(--text-color);
+}
+
+
+header {
+    background-color: var(--primary-color);
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid var(--secondary-color);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    transition: background-color 0.3s ease;
+}
+
+
+header>a {
+    text-decoration: none;
+    color: var(--text-color);
+    font-size: 24px;
+    font-weight: bold;
+}
+
+header>nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+nav {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+nav>button {
+    font-size: 18px;
+}
+
+button {
+    background-color: var(--primary-color);
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    color: var(--text-color);
+    cursor: pointer;
+}
+
+button:hover {
+    text-decoration: underline;
+}
+
+button:focus {
+    outline: none;
+}
+
+button:active {
+    color: var(--text-color);
+}
+
+button:disabled {
+    color: gray;
+    cursor: not-allowed;
+}
+
+button:disabled:hover {
+    text-decoration: none;
+}
+
+main {
+    /* padding: 20px; */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    /* height: calc(100% - 60px); */
+}
+
+section {
+    margin: 10px auto;
+    background-color: var(--secondary-color);
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    width: 100%;
+    max-width: 800px;
+}
+
+section h2 {
+    margin-top: 0;
+}
+
+footer {
+    background-color: var(--primary-color);
+    padding: 10px;
+    text-align: center;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+    color: var(--text-color);
+}
