@@ -3,7 +3,9 @@ import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.6.0/firebase
 import {
     getAuth,
     createUserWithEmailAndPassword,
-    signInWithEmailAndPassword
+    signInWithEmailAndPassword,
+    signOut,
+    onAuthStateChanged,
 } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-auth.js";
 
 const firebaseConfig = {
@@ -57,4 +59,32 @@ window.loginUser = function (event) {
             const errorMessage = error.message;
             alert(errorMessage);
         });
+}
+
+window.logoutUser = function () {
+    signOut(auth).then(() => {
+        // Sign-out successful.
+        alert("User logged out successfully");
+        console.log("User logged out successfully");
+        // window.location.href = "login.html";
+      }).catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        alert(errorMessage);
+      });
+}
+
+window.checkUserLoggedIn = function () {
+    onAuthStateChanged(auth, (user) => {
+        if (user) {
+            const uid = user.uid;
+            // console.log(uid);
+            console.log("User is logged in", uid);
+            
+        } else {
+            console.log("User is logged out");
+            
+            window.location.href = 'login.html';
+        }
+    });
 }
