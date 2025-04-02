@@ -215,7 +215,6 @@ window.addHabit = function (event) {
 }
 
 window.viewHabits = async function () {
-    const user = auth.currentUser;
     const userRef = collection(db, "habits");
     const querySnapshot = await getDocs(userRef);
 
@@ -234,10 +233,8 @@ window.viewHabits = async function () {
             habitCard.onclick = function () {  
                 if (habitDetails.style.display === "none") {
                     habitDetails.style.display = "block";
-                    detailsButton.innerHTML = "&#11165;";
                 } else {
                     habitDetails.style.display = "none";
-                    detailsButton.innerHTML = "&#11167;";
                 }
             }
 
@@ -314,17 +311,19 @@ window.viewHabits = async function () {
             const editButton = document.createElement('button');
             editButton.innerText = "Edit";
             editButton.style.marginRight = "10px";
-            editButton.onclick = function () {
+            editButton.onclick = function (event) {
                 // Edit habit logic
                 console.log("Edit habit", doc.id);
+                event.stopPropagation();
             }
             habitDetails.appendChild(editButton);
 
             const deleteButton = document.createElement('button');
             deleteButton.innerText = "Delete";
-            deleteButton.onclick = function () {
+            deleteButton.onclick = function (event) {
                 // Delete habit logic
                 console.log("Delete habit", doc.id);
+                event.stopPropagation();
             }
             habitDetails.appendChild(deleteButton);
 
@@ -337,3 +336,4 @@ window.viewHabits = async function () {
 
     // navigation.showViewHabits();
 }
+
