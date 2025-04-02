@@ -231,7 +231,7 @@ window.viewHabits = async function () {
         if (habit.userId === user) {
             const habitCard = document.createElement('div');
             habitCard.className = "Habits";
-            habitCard.onclick = function () {  
+            habitCard.onclick = function () {
                 if (habitDetails.style.display === "none") {
                     habitDetails.style.display = "block";
                 } else {
@@ -338,31 +338,45 @@ window.viewHabits = async function () {
     // navigation.showViewHabits();
 }
 
-window.showDashboard = function () {
-    const progressBars = document.getElementById("progress-bars");
+window.showDashboard = async function () {
+    // const progressBars = document.getElementById("progress-bars");
 
-    // Example data
-    const habits = [
-        { name: "Exercise", progress: 70 },
-        { name: "Reading", progress: 50 },
-        { name: "Meditation", progress: 30 },
-    ];
+    // // Example data
+    // const habits = [
+    //     { name: "Exercise", progress: 70 },
+    //     { name: "Reading", progress: 50 },
+    //     { name: "Meditation", progress: 30 },
+    // ];
 
-    // Populate progress bars
-    habits.forEach(habit => {
-        const progressItem = document.createElement("div");
-        progressItem.classList.add("progress-item");
+    // // Populate progress bars
+    // habits.forEach(habit => {
+    //     const progressItem = document.createElement("div");
+    //     progressItem.classList.add("progress-item");
 
-        const label = document.createElement("label");
-        label.textContent = habit.name;
+    //     const label = document.createElement("label");
+    //     label.textContent = habit.name;
 
-        const progress = document.createElement("progress");
-        progress.value = habit.progress;
-        progress.max = 100;
+    //     const progress = document.createElement("progress");
+    //     progress.value = habit.progress;
+    //     progress.max = 100;
 
-        progressItem.appendChild(label);
-        progressItem.appendChild(progress);
-        progressBars.appendChild(progressItem);
-    });
+    //     progressItem.appendChild(label);
+    //     progressItem.appendChild(progress);
+    //     progressBars.appendChild(progressItem);
+    // });
+
+    const categoryDashboard = document.getElementById("category-dashboard");
+    const userRef = collection(db, "habits");
+    const querySnapshot = await getDocs(userRef);
+
+
+    querySnapshot.forEach((doc) => {
+        const user = auth.currentUser.uid;
+        const habit = doc.data();
+
+        if (habit.userId === user) {
+            
+        }
+    })
 }
 
