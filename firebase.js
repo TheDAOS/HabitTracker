@@ -157,6 +157,7 @@ window.indexLoad = function () {
     checkUserLoggedIn();
     navigation.showDashboard();
     viewHabits();
+    showDashboard();
 }
 
 window.addHabit = function (event) {
@@ -225,7 +226,7 @@ window.viewHabits = async function () {
         const habitsContainer = document.getElementById('habits-list');
 
 
-        console.log(habit.userId, user);
+        // console.log(habit.userId, user);
 
         if (habit.userId === user) {
             const habitCard = document.createElement('div');
@@ -335,5 +336,33 @@ window.viewHabits = async function () {
     });
 
     // navigation.showViewHabits();
+}
+
+window.showDashboard = function () {
+    const progressBars = document.getElementById("progress-bars");
+
+    // Example data
+    const habits = [
+        { name: "Exercise", progress: 70 },
+        { name: "Reading", progress: 50 },
+        { name: "Meditation", progress: 30 },
+    ];
+
+    // Populate progress bars
+    habits.forEach(habit => {
+        const progressItem = document.createElement("div");
+        progressItem.classList.add("progress-item");
+
+        const label = document.createElement("label");
+        label.textContent = habit.name;
+
+        const progress = document.createElement("progress");
+        progress.value = habit.progress;
+        progress.max = 100;
+
+        progressItem.appendChild(label);
+        progressItem.appendChild(progress);
+        progressBars.appendChild(progressItem);
+    });
 }
 
