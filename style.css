@@ -172,7 +172,7 @@ footer {
     width: 90%;
     max-width: 600px;
 
-    background-color: var(--clr-surface-a20);
+    background-color: var(--clr-surface-a10);
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
@@ -204,18 +204,19 @@ a:visited {
 }
 
 /* dashboard start*/
-.habit-form {
+.habit-form,
+.habits-list {
     display: flex;
     flex-direction: column;
     /* align-items: center; */
     justify-content: center;
     /* width: 90%; */
     /* max-width: 600px; */
-    background-color: var(--clr-surface-a20);
+    background-color: var(--clr-surface-a10);
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
-    margin: 20px auto;
+    /* margin: 20px auto; */
 }
 
 .habit-form>form>* {

@@ -10,7 +10,8 @@ import {
 import {
     getFirestore,
     collection,
-    addDoc
+    addDoc,
+    getDocs
 } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-firestore.js";
 
 const firebaseConfig = {
@@ -94,10 +95,10 @@ window.checkUserLoggedIn = function () {
         if (user) {
             const uid = user.uid;
             // console.log(uid);
-            console.log("User is logged in", uid);
+            // console.log("User is logged in", uid);
 
         } else {
-            console.log("User is logged out");
+            // console.log("User is logged out");
 
             window.location.href = 'login.html';
         }
@@ -152,8 +153,9 @@ window.navigation = {
 }
 
 window.indexLoad = function () {
-    checkUserLoggedIn()
-    navigation.showDashboard()
+    checkUserLoggedIn();
+    navigation.showDashboard();
+    viewHabits();
 }
 
 window.addHabit = function (event) {
@@ -209,4 +211,38 @@ window.addHabit = function (event) {
             console.error("Error adding habit: ", error);
             alert("Error adding habit");
         });
+}
+
+window.viewHabits = async function () {
+    const user = auth.currentUser;
+    const userRef = collection(db, "habits");
+    const querySnapshot = await getDocs(userRef);
+
+
+    querySnapshot.forEach((doc) => {
+        const user = auth.currentUser.uid;
+        const habit = doc.data();
+
+        console.log(habit.userId, user);
+
+        if (habit.userId === user) {
+            const habitDIV = document.createElement('div');
+            habitDIV.className = "habit";
+            habitDIV.innerHTML = `
+                <h3>${habit.name}</h3>
+                <p>${habit.description}</p>
+                <p>Category: ${habit.category}</p>
+                <p>Type: ${habit.type}</p>
+                <p>Difficulty: ${habit.difficulty}</p>
+                <p>Goal: ${habit.goal}</p>
+                <p>Streak: ${habit.streak}</p>
+                <p>Total Completed: ${habit.totalCompleted}</p>
+            `;
+            const habitsContainer = document.getElementById('habits-list');
+            habitsContainer.appendChild(habitDIV);
+        }
+
+    });
+
+    // navigation.showViewHabits();
 }
