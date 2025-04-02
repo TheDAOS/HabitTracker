@@ -369,14 +369,40 @@ window.showDashboard = async function () {
     const userRef = collection(db, "habits");
     const querySnapshot = await getDocs(userRef);
 
+    const categories = {
+        "health": {completed: 0, total: 0},
+        "productivity": {completed: 0, total: 0},
+        "lifestyle": {completed: 0, total: 0},
+        "learning": {completed: 0, total: 0},
+        "social": {completed: 0, total: 0},
+        "Other": {completed: 0, total: 0},
+    };
 
     querySnapshot.forEach((doc) => {
         const user = auth.currentUser.uid;
         const habit = doc.data();
 
         if (habit.userId === user) {
+            // console.log(habit, habit.category);
             
+            categories[habit.category].completed += habit.totalCompleted;
+            categories[habit.category].total += getDaysSinceCreated(habit.createdAt);
         }
     })
+
+    console.log(categories);
 }
 
+function getDaysSinceCreated(createdAt) {
+    // Ensure createdAt is a Date object. If it is a string or timestamp, convert it.
+    const createdDate = createdAt instanceof Date ? createdAt : new Date(createdAt);
+    const today = new Date();
+
+    // Calculate the difference in time (milliseconds)
+    const diffTime = today - createdDate;
+
+    // Convert milliseconds to days
+    const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+
+    return diffDays;
+}
