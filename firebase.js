@@ -222,24 +222,51 @@ window.viewHabits = async function () {
     querySnapshot.forEach((doc) => {
         const user = auth.currentUser.uid;
         const habit = doc.data();
+        const habitsContainer = document.getElementById('habits-list');
+
 
         console.log(habit.userId, user);
 
         if (habit.userId === user) {
-            const habitDIV = document.createElement('div');
-            habitDIV.className = "habit";
-            habitDIV.innerHTML = `
-                <h3>${habit.name}</h3>
-                <p>${habit.description}</p>
-                <p>Category: ${habit.category}</p>
-                <p>Type: ${habit.type}</p>
-                <p>Difficulty: ${habit.difficulty}</p>
-                <p>Goal: ${habit.goal}</p>
-                <p>Streak: ${habit.streak}</p>
-                <p>Total Completed: ${habit.totalCompleted}</p>
-            `;
-            const habitsContainer = document.getElementById('habits-list');
-            habitsContainer.appendChild(habitDIV);
+            const habitCard = document.createElement('div');
+
+            habitCard.className = "Habits";
+            // habitCard.innerHTML = `
+            //     <h3>${habit.name}</h3>
+            //     <p>${habit.description}</p>
+            //     <p>Category: ${habit.category}</p>
+            //     <p>Type: ${habit.type}</p>
+            //     <p>Difficulty: ${habit.difficulty}</p>
+            //     <p>Goal: ${habit.goal}</p>
+            //     <p>Streak: ${habit.streak}</p>
+            //     <p>Total Completed: ${habit.totalCompleted}</p>
+            // `;
+
+            const div1 = document.createElement('div');
+            div1.style.display = "flex";
+            div1.style.alignItems = "center";
+            div1.style.gap = "10px";
+
+
+            const img = document.createElement('img');
+            img.src = `https://api.dicebear.com/9.x/icons/svg?seed=${habit.name}&radius=50`;
+            img.style.width = "34px";
+            img.style.height = "34px";
+            img.alt = "avatar";
+            div1.appendChild(img);
+
+            const name = document.createElement('h3');
+            name.innerText = habit.name;
+            div1.appendChild(name);
+
+            habitCard.appendChild(div1);
+
+            const detailsButton = document.createElement('button');
+            // detailsButton.innerHTML = "&#8681;";
+            detailsButton.innerHTML = "&#11167;";
+            habitCard.appendChild(detailsButton);
+
+            habitsContainer.appendChild(habitCard);
         }
 
     });

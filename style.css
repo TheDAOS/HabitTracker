@@ -76,13 +76,15 @@ nav {
     flex-wrap: wrap;
 }
 
-nav>button {
+nav>button,
+.Habits>button {
     background-color: transparent;
     color: var(--clr-light-a0);
     font-size: 18px;
 }
 
-nav>button:hover {
+nav>button:hover,
+.Habits>button:hover {
     text-decoration: underline;
     text-decoration-color: var(--clr-primary-a0);
 }
@@ -272,6 +274,7 @@ select {
     border: 1px solid var(--clr-surface-a0);
     border-radius: 8px;
 }
+
 select:focus,
 select:active {
     outline: none;
@@ -283,3 +286,21 @@ input[type="checkbox"] {
 }
 
 /* Form End */
+
+
+.Habits {
+    background-color: var(--clr-surface-a0);
+    border: 1px solid var(--clr-primary-a0);
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    cursor: pointer;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.Habits>* {
+    margin: 0;
+}
