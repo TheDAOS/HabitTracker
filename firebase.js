@@ -267,9 +267,10 @@ window.viewHabits = async function () {
 
             const completedButton = document.createElement('button');
             completedButton.innerText = "Completed";
-            completedButton.onclick = function () {
+            completedButton.onclick = function (event) {
                 // Mark habit as completed logic
                 console.log("Mark habit as completed", doc.id);
+                event.stopPropagation();
             }
             compactDIV.appendChild(completedButton);
 
