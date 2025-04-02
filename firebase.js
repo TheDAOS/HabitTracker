@@ -5,8 +5,13 @@ import {
     createUserWithEmailAndPassword,
     signInWithEmailAndPassword,
     signOut,
-    onAuthStateChanged,
+    onAuthStateChanged
 } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-auth.js";
+import {
+    getFirestore,
+    collection,
+    addDoc
+} from "https://www.gstatic.com/firebasejs/11.6.0/firebase-firestore.js";
 
 const firebaseConfig = {
     apiKey: "AIzaSyAMWuBDM5rP3saLRJox-_LTqmM74EbkEtE",
@@ -21,25 +26,35 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
 const auth = getAuth();
+const db = getFirestore(app);
 
-window.registerUser = function (event) {
+window.registerUser = async function (event) {
     event.preventDefault();
+    const username = document.getElementById('username').value;
     const email = document.getElementById('email').value;
     const password = document.getElementById('password').value;
 
-    createUserWithEmailAndPassword(auth, email, password)
-        .then((userCredential) => {
-            // Signed up 
-            const user = userCredential.user;
-            alert("User registered successfully");
+    try {
+        // Create a new user with email and password
+        const userCredential = await createUserWithEmailAndPassword(auth, email, password)
+        const user = userCredential.user;
 
-            window.location.href = "login.html";
-        })
-        .catch((error) => {
-            const errorCode = error.code;
-            const errorMessage = error.message;
-            alert(errorMessage);
+        // Add user data to Firestore
+        const userRef = collection(db, "users");
+        await addDoc(userRef, {
+            username: username,
+            email: email,
+            uid: user.uid,
+            habits: [],
         });
+        // console.log("User data added to Firestore");
+        alert("User registered successfully");
+        window.location.href = "login.html";
+    } catch (error) {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        alert(errorMessage);
+    }
 }
 
 window.loginUser = function (event) {
@@ -67,11 +82,11 @@ window.logoutUser = function () {
         // alert("User logged out successfully");
         console.log("User logged out successfully");
         // window.location.href = "login.html";
-      }).catch((error) => {
+    }).catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
         alert(errorMessage);
-      });
+    });
 }
 
 window.checkUserLoggedIn = function () {
@@ -80,10 +95,10 @@ window.checkUserLoggedIn = function () {
             const uid = user.uid;
             // console.log(uid);
             console.log("User is logged in", uid);
-            
+
         } else {
             console.log("User is logged out");
-            
+
             window.location.href = 'login.html';
         }
     });
