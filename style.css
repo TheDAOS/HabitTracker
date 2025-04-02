@@ -296,9 +296,14 @@ input[type="checkbox"] {
     border-radius: 8px;
     cursor: pointer;
 
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    /* display: flex; */
+    /* justify-content: space-between; */
+    /* align-items: center; */
+}
+
+.Habits:hover {
+    background-color: var(--clr-surface-a10);
+    border-color: var(--clr-primary-a10);
 }
 
 .Habits>* {

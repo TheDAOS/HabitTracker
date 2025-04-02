@@ -153,6 +153,7 @@ window.navigation = {
 }
 
 window.indexLoad = function () {
+    navigation.hideAll();
     checkUserLoggedIn();
     navigation.showDashboard();
     viewHabits();
@@ -229,24 +230,21 @@ window.viewHabits = async function () {
 
         if (habit.userId === user) {
             const habitCard = document.createElement('div');
-
             habitCard.className = "Habits";
-            // habitCard.innerHTML = `
-            //     <h3>${habit.name}</h3>
-            //     <p>${habit.description}</p>
-            //     <p>Category: ${habit.category}</p>
-            //     <p>Type: ${habit.type}</p>
-            //     <p>Difficulty: ${habit.difficulty}</p>
-            //     <p>Goal: ${habit.goal}</p>
-            //     <p>Streak: ${habit.streak}</p>
-            //     <p>Total Completed: ${habit.totalCompleted}</p>
-            // `;
+            habitCard.onclick = function () {  
+                if (habitDetails.style.display === "none") {
+                    habitDetails.style.display = "block";
+                    detailsButton.innerHTML = "&#11165;";
+                } else {
+                    habitDetails.style.display = "none";
+                    detailsButton.innerHTML = "&#11167;";
+                }
+            }
 
             const div1 = document.createElement('div');
             div1.style.display = "flex";
             div1.style.alignItems = "center";
             div1.style.gap = "10px";
-
 
             const img = document.createElement('img');
             img.src = `https://api.dicebear.com/9.x/icons/svg?seed=${habit.name}&radius=50`;
@@ -261,10 +259,59 @@ window.viewHabits = async function () {
 
             habitCard.appendChild(div1);
 
-            const detailsButton = document.createElement('button');
-            // detailsButton.innerHTML = "&#8681;";
-            detailsButton.innerHTML = "&#11167;";
-            habitCard.appendChild(detailsButton);
+            // const detailsButton = document.createElement('button');
+            // detailsButton.innerHTML = "&#11167;";
+            // detailsButton.style.position = 'absolute';
+            // detailsButton.style.right = '10px';
+            // detailsButton.style.top = '10px';
+            // detailsButton.onclick = function () {  
+            //     if (habitDetails.style.display === "none") {
+            //         habitDetails.style.display = "block";
+            //         detailsButton.innerHTML = "&#11165;";
+            //     } else {
+            //         habitDetails.style.display = "none";
+            //         detailsButton.innerHTML = "&#11167;";
+            //     }
+            // }
+            // habitCard.appendChild(detailsButton);
+
+            const habitDetails = document.createElement('div');
+            habitDetails.style.display = "none";
+
+            const description = document.createElement('p');
+            description.innerText = habit.description;
+            habitDetails.appendChild(description);
+
+            const category = document.createElement('p');
+            category.innerText = `Category: ${habit.category}`;
+            habitDetails.appendChild(category);
+
+            const type = document.createElement('p');
+            type.innerText = `Type: ${habit.type}`;
+            habitDetails.appendChild(type);
+
+            const difficulty = document.createElement('p');
+            difficulty.innerText = `Difficulty: ${habit.difficulty}`;
+            habitDetails.appendChild(difficulty);
+
+            const goal = document.createElement('p');
+            goal.innerText = `Goal: ${habit.goal}`;
+            habitDetails.appendChild(goal);
+
+            const streak = document.createElement('p');
+            streak.innerText = `Streak: ${habit.streak}`;
+            habitDetails.appendChild(streak);
+
+            const totalCompleted = document.createElement('p');
+            totalCompleted.innerText = `Total Completed: ${habit.totalCompleted}`;
+            habitDetails.appendChild(totalCompleted);
+
+            const reminder = document.createElement('p');
+            reminder.innerText = `Reminder: ${habit.reminder ? "Yes" : "No"}`;
+            habitDetails.appendChild(reminder);
+
+            habitCard.appendChild(habitDetails);
+
 
             habitsContainer.appendChild(habitCard);
         }
