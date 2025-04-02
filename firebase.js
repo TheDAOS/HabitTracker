@@ -241,6 +241,12 @@ window.viewHabits = async function () {
                 }
             }
 
+            const compactDIV = document.createElement('div');
+            compactDIV.style.display = "flex";
+            compactDIV.style.justifyContent = "space-between";
+            compactDIV.style.alignItems = "center";
+            compactDIV.style.gap = "10px";
+
             const div1 = document.createElement('div');
             div1.style.display = "flex";
             div1.style.alignItems = "center";
@@ -257,23 +263,17 @@ window.viewHabits = async function () {
             name.innerText = habit.name;
             div1.appendChild(name);
 
-            habitCard.appendChild(div1);
+            compactDIV.appendChild(div1);
 
-            // const detailsButton = document.createElement('button');
-            // detailsButton.innerHTML = "&#11167;";
-            // detailsButton.style.position = 'absolute';
-            // detailsButton.style.right = '10px';
-            // detailsButton.style.top = '10px';
-            // detailsButton.onclick = function () {  
-            //     if (habitDetails.style.display === "none") {
-            //         habitDetails.style.display = "block";
-            //         detailsButton.innerHTML = "&#11165;";
-            //     } else {
-            //         habitDetails.style.display = "none";
-            //         detailsButton.innerHTML = "&#11167;";
-            //     }
-            // }
-            // habitCard.appendChild(detailsButton);
+            const completedButton = document.createElement('button');
+            completedButton.innerText = "Completed";
+            completedButton.onclick = function () {
+                // Mark habit as completed logic
+                console.log("Mark habit as completed", doc.id);
+            }
+            compactDIV.appendChild(completedButton);
+
+            habitCard.appendChild(compactDIV);
 
             const habitDetails = document.createElement('div');
             habitDetails.style.display = "none";
@@ -310,8 +310,24 @@ window.viewHabits = async function () {
             reminder.innerText = `Reminder: ${habit.reminder ? "Yes" : "No"}`;
             habitDetails.appendChild(reminder);
 
-            habitCard.appendChild(habitDetails);
+            const editButton = document.createElement('button');
+            editButton.innerText = "Edit";
+            editButton.style.marginRight = "10px";
+            editButton.onclick = function () {
+                // Edit habit logic
+                console.log("Edit habit", doc.id);
+            }
+            habitDetails.appendChild(editButton);
 
+            const deleteButton = document.createElement('button');
+            deleteButton.innerText = "Delete";
+            deleteButton.onclick = function () {
+                // Delete habit logic
+                console.log("Delete habit", doc.id);
+            }
+            habitDetails.appendChild(deleteButton);
+
+            habitCard.appendChild(habitDetails);
 
             habitsContainer.appendChild(habitCard);
         }

@@ -76,15 +76,13 @@ nav {
     flex-wrap: wrap;
 }
 
-nav>button,
-.Habits>button {
+nav>button {
     background-color: transparent;
     color: var(--clr-light-a0);
     font-size: 18px;
 }
 
-nav>button:hover,
-.Habits>button:hover {
+nav>button:hover {
     text-decoration: underline;
     text-decoration-color: var(--clr-primary-a0);
 }
