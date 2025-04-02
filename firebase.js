@@ -390,6 +390,22 @@ window.showDashboard = async function () {
         }
     })
 
+    for (const key in categories) {
+        const progressItem = document.createElement("div");
+        progressItem.classList.add("progress-item");
+
+        const label = document.createElement("label");
+        label.textContent = key;
+
+        const progress = document.createElement("progress");
+        progress.value = categories[key].completed;
+        progress.max = categories[key].total;
+
+        progressItem.appendChild(label);
+        progressItem.appendChild(progress);
+        categoryDashboard.appendChild(progressItem);
+    }
+
     console.log(categories);
 }
 
