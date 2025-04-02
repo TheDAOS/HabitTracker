@@ -370,12 +370,12 @@ window.showDashboard = async function () {
     const querySnapshot = await getDocs(userRef);
 
     const categories = {
-        "health": {completed: 0, total: 0},
-        "productivity": {completed: 0, total: 0},
-        "lifestyle": {completed: 0, total: 0},
-        "learning": {completed: 0, total: 0},
-        "social": {completed: 0, total: 0},
-        "Other": {completed: 0, total: 0},
+        "health": { completed: 0, total: 0 },
+        "productivity": { completed: 0, total: 0 },
+        "lifestyle": { completed: 0, total: 0 },
+        "learning": { completed: 0, total: 0 },
+        "social": { completed: 0, total: 0 },
+        "Other": { completed: 0, total: 0 },
     };
 
     querySnapshot.forEach((doc) => {
@@ -384,24 +384,43 @@ window.showDashboard = async function () {
 
         if (habit.userId === user) {
             // console.log(habit, habit.category);
-            
+
             categories[habit.category].completed += habit.totalCompleted;
-            categories[habit.category].total += getDaysSinceCreated(habit.createdAt);
+            categories[habit.category].total += getDaysFromCreated(habit.createdAt);
         }
     })
 
     console.log(categories);
 }
 
-function getDaysSinceCreated(createdAt) {
-    // Ensure createdAt is a Date object. If it is a string or timestamp, convert it.
-    const createdDate = createdAt instanceof Date ? createdAt : new Date(createdAt);
+function getDaysFromCreated(createdAt) {
+    let createdDate;
+
+    // Check if createdAt is a Firestore Timestamp object (has a toDate method)
+    if (createdAt && typeof createdAt === 'object' && typeof createdAt.toDate === 'function') {
+        createdDate = createdAt.toDate();
+    }
+    // Else if it's already a Date object, use it directly
+    else if (createdAt instanceof Date) {
+        createdDate = createdAt;
+    }
+    // Otherwise, try to create a Date object from the input (works for ISO string or timestamp)
+    else {
+        createdDate = new Date(createdAt);
+    }
+
+    // Check if conversion was successful
+    if (isNaN(createdDate.getTime())) {
+        console.error('Invalid date:', createdAt);
+        return NaN;
+    }
+
     const today = new Date();
 
-    // Calculate the difference in time (milliseconds)
-    const diffTime = today - createdDate;
+    // Calculate the difference in milliseconds
+    const diffTime = today.getTime() - createdDate.getTime();
 
-    // Convert milliseconds to days
+    // Convert milliseconds to days (milliseconds per day = 1000 * 60 * 60 * 24)
     const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
 
     return diffDays;
