@@ -155,3 +155,58 @@ window.indexLoad = function () {
     checkUserLoggedIn()
     navigation.showDashboard()
 }
+
+window.addHabit = function (event) {
+    event.preventDefault();
+    const habitName = document.getElementById('habit-name').value;
+    const habitDescription = document.getElementById('habit-description').value;
+    const habitCategory = document.getElementById('habit-category').value;
+    const habitType = document.getElementById('type').value;
+    const habitDifficulty = document.getElementById('difficulty').value;
+    const habitGoal = document.getElementById('goal').value;
+    const habitReminder = document.getElementById('reminders').checked;
+    const habitReminderTime = document.getElementById('reminder-time').value;
+    const checkboxes = document.querySelectorAll('.day');
+
+    const checkedDays = [];
+    const weekdays = [
+        "Sunday", "Monday",
+        "Tuesday", "Wednesday",
+        "Thursday", "Friday", "Saturday"
+    ];
+
+    checkboxes.forEach(checkbox => {
+        if (checkbox.checked) {
+            checkedDays.push(weekdays.indexOf(checkbox.value));
+        }
+    });
+
+    // Add habit to Firestore
+    const userRef = collection(db, "habits");
+    addDoc(userRef, {
+        userId: auth.currentUser.uid,
+        name: habitName,
+        description: habitDescription,
+        category: habitCategory,
+        type: habitType,
+        difficulty: habitDifficulty,
+        createdAt: new Date(),
+        lastUpdated: new Date(),
+        streak: 0,
+        totalCompleted: 0,
+        goal: habitGoal,
+        reminder: (habitReminder) ? {
+            frequency: habitReminderTime,
+            days: checkedDays,
+        } : false,
+    })
+        .then(() => {
+            alert("Habit added successfully");
+            // window.location.href = "index.html";
+            navigation.showViewHabits();
+        })
+        .catch((error) => {
+            console.error("Error adding habit: ", error);
+            alert("Error adding habit");
+        });
+}

@@ -154,11 +154,6 @@ footer {
     color: var(--clr-light-a0);
 }
 
-/* .hidden {
-    display: none;
-
-} */
-
 .login,
 .register {
     padding-top: 10px;
@@ -194,14 +189,6 @@ footer {
     margin-bottom: 20px;
 }
 
-.login-card input,
-.register-card input {
-    /* padding: 5px; */
-    padding: 10px;
-    border: 1px solid var(--clr-surface-a30);
-    border-radius: 8px;
-}
-
 a {
     color: var(--clr-primary-a0);
     text-decoration: none;
@@ -215,3 +202,83 @@ a:hover {
 a:visited {
     color: var(--clr-primary-a10);
 }
+
+/* dashboard start*/
+.habit-form {
+    display: flex;
+    flex-direction: column;
+    /* align-items: center; */
+    justify-content: center;
+    /* width: 90%; */
+    /* max-width: 600px; */
+    background-color: var(--clr-surface-a20);
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    margin: 20px auto;
+}
+
+.habit-form>form>* {
+    margin: 0;
+    margin-bottom: 10px;
+}
+
+/* dashboard end */
+
+
+/* Form Start */
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+input {
+    background-color: var(--clr-surface-a0);
+    color: var(--clr-light-a0);
+    padding: 10px;
+    border: 1px solid var(--clr-surface-a0);
+    border-radius: 8px;
+}
+
+input:focus,
+input:active {
+    outline: none;
+    border-color: var(--clr-primary-a0);
+}
+
+textarea {
+    background-color: var(--clr-surface-a0);
+    color: var(--clr-light-a0);
+    padding: 10px;
+    border: 1px solid var(--clr-surface-a0);
+    border-radius: 8px;
+}
+
+textarea:focus,
+textarea:active {
+    outline: none;
+    border-color: var(--clr-primary-a0);
+}
+
+textarea::placeholder {
+    color: var(--clr-surface-a50);
+}
+
+select {
+    background-color: var(--clr-surface-a0);
+    color: var(--clr-light-a0);
+    padding: 10px;
+    border: 1px solid var(--clr-surface-a0);
+    border-radius: 8px;
+}
+select:focus,
+select:active {
+    outline: none;
+    border-color: var(--clr-primary-a0);
+}
+
+input[type="checkbox"] {
+    cursor: pointer;
+}
+
+/* Form End */

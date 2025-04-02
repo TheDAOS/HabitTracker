@@ -31,53 +31,98 @@
     </header>
 
     <main>
-        <section id="dashboard" class="habit-progress hidden">
+        <section id="dashboard" class="habit-progress">
             <h2>Habit Progress</h2>
             <div id="progress-chart"></div>
             <button id="export-progress">Export Progress</button>
         </section>
 
-        <section id="viewHabits" class="habits-list hidden">
+        <section id="viewHabits" class="habits-list">
             <h2>Your Habits</h2>
             <ul id="habits-list"></ul>
         </section>
 
-        <section id="community" class="community hidden">
+        <section id="community" class="community">
             <h2>Community</h2>
             <div id="community-posts"></div>
             <button id="create-post">Create Post</button>
         </section>
 
-        <section id="challenges" class="challenges hidden">
+        <section id="challenges" class="challenges">
             <h2>Challenges</h2>
             <div id="challenges-list"></div>
             <button id="join-challenge">Join Challenge</button>
         </section>
 
-        <section id="addHabit" class="habit-form hidden">
+        <section id="addHabit" class="habit-form">
             <h2>Add a New Habit</h2>
-            <form id="habit-form">
-                <label for="habit-name">Habit Name:</label>
-                <input type="text" id="habit-name" required>
+            <form id="habit-form" onsubmit="addHabit(event)">
+                <label for="habit-name">Habit Name</label>
+                <input type="text" id="habit-name" name="habit-name" required>
 
-                <label for="habit-frequency">Frequency:</label>
-                <select id="habit-frequency" required>
+                <label for="habit-description">Description</label>
+                <textarea id="habit-description" name="habit-description"></textarea>
+
+                <label for="habit-category">Category</label>
+                <select id="habit-category" name="habit-category" required>
+                    <option value="health">Health</option>
+                    <option value="productivity">Productivity</option>
+                    <option value="lifestyle">Lifestyle</option>
+                    <option value="learning">Learning</option>
+                    <option value="social">Social</option>
+                    <option value="other">Other</option>
+                </select>
+
+                <label for="type">Type</label>
+                <select id="type" name="type" required>
                     <option value="daily">Daily</option>
                     <option value="weekly">Weekly</option>
                     <option value="monthly">Monthly</option>
+                    <option value="yearly">Yearly</option>
                 </select>
 
+                <label for="difficulty">Difficulty</label>
+                <select id="difficulty" name="difficulty" required>
+                    <option value="easy">Easy</option>
+                    <option value="medium">Medium</option>
+                    <option value="hard">Hard</option>
+                </select>
+
+                <label for="goal">Goal</label>
+                <input type="number" id="goal" name="goal" placeholder="e.g., total miles to run in a month" required>
+
+                <div>
+                    <label for="reminders">Reminders</label>
+                    <input type="checkbox" id="reminders" name="reminders">
+                </div>
+
+                <div>
+                    <label for="reminder-time">Reminder Time</label>
+                    <input type="time" id="reminder-time" name="reminder-time">
+                </div>
+
+
+                <label for="days">Reminder frequency</label>
+                <div><input type="checkbox" class="day" name="days" value="Monday"> Monday</div>
+                <div><input type="checkbox" class="day" name="days" value="Tuesday"> Tuesday</div>
+                <div><input type="checkbox" class="day" name="days" value="Wednesday"> Wednesday</div>
+                <div><input type="checkbox" class="day" name="days" value="Thursday"> Thursday</div>
+                <div><input type="checkbox" class="day" name="days" value="Friday"> Friday</div>
+                <div><input type="checkbox" class="day" name="days" value="Saturday"> Saturday</div>
+                <div><input type="checkbox" class="day" name="days" value="Sunday"> Sunday</div>
+
                 <button type="submit">Add Habit</button>
+                <input type="reset" value="Cancel and Reset">
             </form>
         </section>
 
-        <section id="profile" class="profile hidden">
+        <section id="profile" class="profile">
             <h2>Your Profile</h2>
             <div id="user-profile"></div>
             <button id="edit-profile">Edit Profile</button>
         </section>
 
-        <section id="notifications" class="notifications hidden">
+        <section id="notifications" class="notifications">
             <h2>Notifications</h2>
             <div id="notifications-list"></div>
             <button id="mark-all-read">Mark All as Read</button>
