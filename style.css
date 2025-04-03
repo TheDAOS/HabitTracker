@@ -374,3 +374,11 @@ input[type="checkbox"] {
     font-size: 24px;
     font-weight: bold;
 }
+
+
+@media screen and (max-width: 1230px) {
+    header {
+        flex-direction: column;
+        justify-content: center;
+    }
+}
