@@ -356,14 +356,21 @@ input[type="checkbox"] {
 .streakCard {
     text-align: center;
     background-color: var(--clr-surface-a20);
-    padding: 10px;
+    padding: 20px;
     /* padding-left: 0; */
     border-radius: 8px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-evenly;
+    justify-content: center;
     align-items: center;
-    width: 200px;
+    width: 150px;
     gap: 10px;
+}
+
+.streakCard>div {
+    width: 100%;
+    margin-bottom: 10px;
+    font-size: 24px;
+    font-weight: bold;
 }

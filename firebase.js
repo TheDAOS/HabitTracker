@@ -416,9 +416,6 @@ window.showDashboard = async function () {
             streakCard.classList.add("streakCard");
 
             const name = document.createElement("div");
-            name.style.fontSize = "24px";
-            name.style.fontWeight = "bold";
-            name.style.width = "100%";
             name.innerText = habit.name;
             streakCard.appendChild(name);
 
