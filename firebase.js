@@ -425,6 +425,7 @@ window.showDashboard = async function () {
 
             const img = document.createElement('img');
             img.src = 'images/streak.png';
+            img.alt = 'Streak';
             img.style.width = "84px";
             streakCard.appendChild(img);
 
