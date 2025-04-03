@@ -355,7 +355,7 @@ async function logHabit(habitId, habitData) {
         isToday = areDatesOnSameDayOfWeek(habitData.history[habitData.history.length-1])
     }
 
-    let log;
+    let log = habitData.log;
     if (isToday) {
         log++;
     } else {
