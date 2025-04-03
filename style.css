@@ -343,3 +343,27 @@ input[type="checkbox"] {
     background-color: var(--clr-primary-a0);
     border-radius: 8px;
 }
+
+.streakDashboard {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+}
+
+.streakCard {
+    text-align: center;
+    background-color: var(--clr-surface-a20);
+    padding: 10px;
+    /* padding-left: 0; */
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 200px;
+    gap: 10px;
+}

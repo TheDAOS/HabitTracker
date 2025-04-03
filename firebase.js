@@ -342,6 +342,7 @@ window.showDashboard = async function () {
     const categoryDashboard = document.getElementById("category-dashboard");
     const userRef = collection(db, "habits");
     const querySnapshot = await getDocs(userRef);
+    const user = auth.currentUser.uid;
 
     const categories = {
         "health": { completed: 0, total: 0 },
@@ -353,7 +354,6 @@ window.showDashboard = async function () {
     };
 
     querySnapshot.forEach((doc) => {
-        const user = auth.currentUser.uid;
         const habit = doc.data();
 
         if (habit.userId === user) {
@@ -399,6 +399,46 @@ window.showDashboard = async function () {
     }
 
     // console.log(categories);
+
+    const streakDiv = document.createElement("div");
+    streakDiv.classList.add("streakDashboard");
+
+
+
+    querySnapshot.forEach((doc) => {
+
+        const habit = doc.data();
+
+        // console.log(habit.userId, user);
+
+        if (habit.userId === user) {
+            const streakCard = document.createElement("div");
+            streakCard.classList.add("streakCard");
+
+            const name = document.createElement("div");
+            name.style.fontSize = "24px";
+            name.style.fontWeight = "bold";
+            name.style.width = "100%";
+            name.innerText = habit.name;
+            streakCard.appendChild(name);
+
+
+            const img = document.createElement('img');
+            img.src = 'images/streak.png';
+            img.style.width = "84px";
+            streakCard.appendChild(img);
+
+            const streakNo = document.createElement("span");
+            streakNo.style.fontSize = "72px";
+            streakNo.innerText = habit.streak;
+
+            streakCard.appendChild(streakNo);
+
+            streakDiv.appendChild(streakCard);
+        }
+    })
+
+    categoryDashboard.appendChild(streakDiv);
 }
 
 function getDaysFromCreated(createdAt) {
