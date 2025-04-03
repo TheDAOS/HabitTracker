@@ -204,7 +204,7 @@ window.addHabit = function (event) {
         lastUpdated: new Date(),
         streak: 0,
         totalCompleted: 0,
-        goal: habitGoal,
+        goal: habitGoal*1,
         log: 0,
         history: [],
         reminder: (habitReminder) ? {
