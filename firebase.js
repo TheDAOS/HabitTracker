@@ -204,7 +204,7 @@ window.addHabit = function (event) {
         lastUpdated: new Date(),
         streak: 0,
         totalCompleted: 0,
-        goal: habitGoal*1,
+        goal: habitGoal * 1,
         log: 0,
         history: [],
         reminder: (habitReminder) ? {
@@ -229,7 +229,7 @@ window.viewHabits = async function () {
     const user = auth.currentUser.uid;
     const habitsContainer = document.getElementById('habits-list');
     habitsContainer.innerHTML = ``;
-    
+
 
     querySnapshot.forEach((doc) => {
         const habit = doc.data();
@@ -356,7 +356,7 @@ async function logHabit(habitId, habitData) {
 
     let isToday = true;
     if (habitData.history.length > 0) {
-        isToday = areDatesOnSameDayOfWeek(habitData.history[habitData.history.length-1])
+        isToday = areDatesOnSameDayOfWeek(habitData.history[habitData.history.length - 1])
     }
 
     let log = habitData.log;
@@ -402,10 +402,37 @@ async function logHabit(habitId, habitData) {
         });
 }
 
+async function editHabit(habitId, habitData) {
+    document.getElementById('habit-name').value = habitData.name;
+    document.getElementById('habit-description').value = habitData.description;
+    document.getElementById('habit-category').value = habitData.category;
+    document.getElementById('type').value = habitData.type;
+    document.getElementById('difficulty').value = habitData.difficulty;
+    document.getElementById('goal').value = habitData.goal;
+
+    if (habitData.reminder === false) {
+        document.getElementById('reminders').checked = false;
+    } else {
+        document.getElementById('reminders').checked = true;
+        document.getElementById('reminder-time').value = habitData.reminder.frequency;
+        const checkboxes = document.querySelectorAll('.day');
+
+        const weekdays = [
+            "Sunday", "Monday",
+            "Tuesday", "Wednesday",
+            "Thursday", "Friday", "Saturday"
+        ];
+
+        checkboxes.forEach((checkbox, i) => {
+            checkbox.value = weekdays[habitData.reminder.days[i]];
+        });
+    }
+}
+
 function areDatesOnSameDayOfWeek(date) {
     if (!date) return false;
 
-    
+
 
     if (!(date instanceof Date)) {
         date = date.toDate();
