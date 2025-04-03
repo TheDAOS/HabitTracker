@@ -339,32 +339,6 @@ window.viewHabits = async function () {
 }
 
 window.showDashboard = async function () {
-    // const progressBars = document.getElementById("progress-bars");
-
-    // // Example data
-    // const habits = [
-    //     { name: "Exercise", progress: 70 },
-    //     { name: "Reading", progress: 50 },
-    //     { name: "Meditation", progress: 30 },
-    // ];
-
-    // // Populate progress bars
-    // habits.forEach(habit => {
-    //     const progressItem = document.createElement("div");
-    //     progressItem.classList.add("progress-item");
-
-    //     const label = document.createElement("label");
-    //     label.textContent = habit.name;
-
-    //     const progress = document.createElement("progress");
-    //     progress.value = habit.progress;
-    //     progress.max = 100;
-
-    //     progressItem.appendChild(label);
-    //     progressItem.appendChild(progress);
-    //     progressBars.appendChild(progressItem);
-    // });
-
     const categoryDashboard = document.getElementById("category-dashboard");
     const userRef = collection(db, "habits");
     const querySnapshot = await getDocs(userRef);
