@@ -11,7 +11,9 @@ import {
     getFirestore,
     collection,
     addDoc,
-    getDocs
+    getDocs,
+    updateDoc,
+    doc,
 } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-firestore.js";
 
 const firebaseConfig = {
@@ -156,6 +158,10 @@ window.indexLoad = function () {
     navigation.hideAll();
     checkUserLoggedIn();
     navigation.showDashboard();
+    refreshData();
+}
+
+function refreshData() {
     viewHabits();
     showDashboard();
 }
@@ -220,13 +226,13 @@ window.addHabit = function (event) {
 window.viewHabits = async function () {
     const userRef = collection(db, "habits");
     const querySnapshot = await getDocs(userRef);
-
+    const user = auth.currentUser.uid;
+    const habitsContainer = document.getElementById('habits-list');
+    habitsContainer.innerHTML = ``;
+    
 
     querySnapshot.forEach((doc) => {
-        const user = auth.currentUser.uid;
         const habit = doc.data();
-        const habitsContainer = document.getElementById('habits-list');
-
 
         // console.log(habit.userId, user);
 
@@ -268,8 +274,8 @@ window.viewHabits = async function () {
             const completedButton = document.createElement('button');
             completedButton.innerText = "Log";
             completedButton.onclick = function (event) {
-                // Mark habit as completed logic
-                console.log("Mark habit as completed", doc.id);
+                logHabit(doc.id, habit);
+                // console.log("Mark habit as completed", doc.id);
                 event.stopPropagation();
             }
             compactDIV.appendChild(completedButton);
@@ -340,8 +346,77 @@ window.viewHabits = async function () {
     // navigation.showViewHabits();
 }
 
+async function logHabit(habitId, habitData) {
+    const userRef = collection(db, "habits");
+    const habitRef = doc(userRef, habitId);
+
+    let isToday = true;
+    if (habitData.history.length > 0) {
+        isToday = areDatesOnSameDayOfWeek(habitData.history[habitData.history.length-1])
+    }
+
+    let log;
+    if (isToday) {
+        log++;
+    } else {
+        log = 1;
+    }
+    let streak = habitData.streak;
+    let totalCompleted = habitData.totalCompleted;
+    let history = habitData.history;
+    history.push(new Date());
+
+    if (log === habitData.goal) {
+        streak += 1
+        totalCompleted++;
+    }
+
+
+    console.log(
+        log,
+        history,
+        streak,
+        totalCompleted,
+        areDatesOnSameDayOfWeek(history[history.length - 1]),
+        history[history.length - 1],
+    )
+
+    updateDoc(habitRef, {
+        totalCompleted: totalCompleted,
+        streak: streak,
+        log: log,
+        history: history,
+        lastUpdated: new Date()
+    })
+        .then(() => {
+            console.log("Habit logged successfully");
+            refreshData();
+        })
+        .catch((error) => {
+            console.error("Error logging habit: ", error);
+        });
+}
+
+function areDatesOnSameDayOfWeek(date) {
+    if (!date) return false;
+
+    
+
+    if (!(date instanceof Date)) {
+        date = date.toDate();
+    }
+
+    const today = new Date();
+
+    const givenDayOfWeek = date.getDay();
+    const todayDayOfWeek = today.getDay();
+
+    return givenDayOfWeek === todayDayOfWeek;
+}
+
 window.showDashboard = async function () {
     const categoryDashboard = document.getElementById("category-dashboard");
+    categoryDashboard.innerHTML = ``;
     const userRef = collection(db, "habits");
     const querySnapshot = await getDocs(userRef);
     const user = auth.currentUser.uid;
