@@ -199,6 +199,8 @@ window.addHabit = function (event) {
         streak: 0,
         totalCompleted: 0,
         goal: habitGoal,
+        log: 0,
+        history: [],
         reminder: (habitReminder) ? {
             frequency: habitReminderTime,
             days: checkedDays,
