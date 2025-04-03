@@ -433,3 +433,4 @@ function getDaysFromCreated(createdAt) {
 
     return diffDays + 1;
 }
+
