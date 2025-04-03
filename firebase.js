@@ -272,7 +272,7 @@ window.viewHabits = async function () {
             compactDIV.appendChild(div1);
 
             const completedButton = document.createElement('button');
-            completedButton.innerText = "Log";
+            completedButton.innerText = "Log Progress";
             completedButton.onclick = function (event) {
                 logHabit(doc.id, habit);
                 // console.log("Mark habit as completed", doc.id);
@@ -300,6 +300,10 @@ window.viewHabits = async function () {
             const difficulty = document.createElement('p');
             difficulty.innerText = `Difficulty: ${habit.difficulty}`;
             habitDetails.appendChild(difficulty);
+
+            const log = document.createElement('p');
+            log.innerText = `Log: ${habit.log}`;
+            habitDetails.appendChild(log);
 
             const goal = document.createElement('p');
             goal.innerText = `Goal: ${habit.goal}`;
@@ -366,9 +370,10 @@ async function logHabit(habitId, habitData) {
     let history = habitData.history;
     history.push(new Date());
 
-    if (log === habitData.goal) {
+    if (log >= habitData.goal) {
         streak += 1
         totalCompleted++;
+        log = 0;
     }
 
 
