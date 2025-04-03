@@ -285,6 +285,9 @@ input[type="checkbox"] {
 
 /* Form End */
 
+.habit-progress {
+    max-width: 1600px;
+}
 
 .Habits {
     background-color: var(--clr-surface-a0);
@@ -306,4 +309,37 @@ input[type="checkbox"] {
 
 .Habits>* {
     margin: 0;
+}
+
+.progress-item {
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    align-items: center;
+    margin-bottom: 10px;
+    gap: 10px;
+}
+
+.dashboard-card-1 {
+    background-color: var(--clr-surface-a20);
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    display: flex;
+    flex-direction: column;
+    width: 400px;
+    gap: 10px;
+}
+
+.dashboard-card-1>div {
+    height: 20px;
+    width: 100%;
+    background-color: var(--clr-surface-a0);
+    border-radius: 8px;
+}
+
+.dashboard-card-1>div>div {
+    height: 100%;
+    background-color: var(--clr-primary-a0);
+    border-radius: 8px;
 }

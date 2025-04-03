@@ -264,7 +264,7 @@ window.viewHabits = async function () {
             compactDIV.appendChild(div1);
 
             const completedButton = document.createElement('button');
-            completedButton.innerText = "Completed";
+            completedButton.innerText = "Log";
             completedButton.onclick = function (event) {
                 // Mark habit as completed logic
                 console.log("Mark habit as completed", doc.id);
@@ -387,26 +387,44 @@ window.showDashboard = async function () {
 
             categories[habit.category].completed += habit.totalCompleted;
             categories[habit.category].total += getDaysFromCreated(habit.createdAt);
+            // console.log(getDaysFromCreated(habit.createdAt), habit.category);
         }
     })
 
+    const progressItem = document.createElement("div");
+    progressItem.classList.add("progress-item");
+
     for (const key in categories) {
-        const progressItem = document.createElement("div");
-        progressItem.classList.add("progress-item");
+
+
+        const progressElement = document.createElement("div");
+        progressElement.classList.add("dashboard-card-1");
 
         const label = document.createElement("label");
         label.textContent = key;
 
-        const progress = document.createElement("progress");
-        progress.value = categories[key].completed;
-        progress.max = categories[key].total;
+        const progressBar = document.createElement("div");
+        const progress = document.createElement("div");
 
-        progressItem.appendChild(label);
-        progressItem.appendChild(progress);
+        if (categories[key].total !== 0) {
+            const percent = (categories[key].completed / categories[key].total) * 100;
+            progress.style.width = `${percent}%`;
+        } else {
+            progress.style.width = `0%`;
+        }
+
+
+
+        progressBar.appendChild(progress);
+
+        progressElement.appendChild(label);
+        progressElement.appendChild(progressBar);
+
+        progressItem.appendChild(progressElement);
         categoryDashboard.appendChild(progressItem);
     }
 
-    console.log(categories);
+    // console.log(categories);
 }
 
 function getDaysFromCreated(createdAt) {
@@ -439,5 +457,5 @@ function getDaysFromCreated(createdAt) {
     // Convert milliseconds to days (milliseconds per day = 1000 * 60 * 60 * 24)
     const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
 
-    return diffDays;
+    return diffDays + 1;
 }
