@@ -354,10 +354,10 @@ window.viewHabits = async function () {
             habitDetails.appendChild(reminder);
 
             const CreateChallengesButton = document.createElement('button');
-            CreateChallengesButton.innerText = "Create from this Challenges";
+            CreateChallengesButton.innerText = "Create Challenges from this";
             CreateChallengesButton.style.marginRight = "10px";
             CreateChallengesButton.onclick = function (event) {
-                CreateChallenges(doc.id, habit);
+                createChallengesFromHabit(doc.id, habit);
                 event.stopPropagation();
             }
             habitDetails.appendChild(CreateChallengesButton);
@@ -679,7 +679,7 @@ function getDaysFromCreated(createdAt) {
     return diffDays + 1;
 }
 
-window.CreateChallenges = async function (habitID, habitData) {
+window.createChallengesFromHabit = async function (habitID, habitData) {
     const challengesRef = collection(db, "challenges");
     const user = auth.currentUser.uid;
 
@@ -693,6 +693,7 @@ window.CreateChallenges = async function (habitID, habitData) {
     })
         .then(() => {
             alert("Challenge created successfully");
+            refreshData();
             navigation.showChallenges();
         })
         .catch((error) => {
