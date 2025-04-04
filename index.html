@@ -53,7 +53,7 @@
             <h2>Challenges</h2>
             <div id="challenges-list"></div>
             <button id="join-challenge">Join Challenge</button>
-            <button id="create-challenge">Create Challenge</button>
+            <button id="create-challenge" onclick="navigation.createChallenges">Create Challenge</button>
         </section>
 
         <section id="createChallenge" class="create-challenge">
@@ -70,6 +70,7 @@
 
                 <label for="challenge-end-date">End Date</label>
                 <input type="date" id="challenge-end-date" name="challenge-end-date" required>
+
 
                 <h4>Habit Template</h4>
 
@@ -119,7 +120,6 @@
                     <input type="time" id="reminder-time" name="reminder-time">
                 </div>
 
-
                 <label for="days">Reminder frequency</label>
                 <div><input type="checkbox" class="day" name="days" value="Sunday"> Sunday</div>
                 <div><input type="checkbox" class="day" name="days" value="Monday"> Monday</div>
@@ -129,8 +129,8 @@
                 <div><input type="checkbox" class="day" name="days" value="Friday"> Friday</div>
                 <div><input type="checkbox" class="day" name="days" value="Saturday"> Saturday</div>
 
-
                 <button type="submit">Create Challenge</button>
+                <input type="reset" value="Cancel and Reset">
             </form>
         </section>
 
