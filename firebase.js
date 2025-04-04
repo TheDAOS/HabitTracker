@@ -356,7 +356,7 @@ window.viewHabits = async function () {
             editButton.onclick = function (event) {
                 // Edit habit logic
                 console.log("Edit habit", doc.id);
-                editHabit(habit.userId, habit);
+                editHabit(doc.id, habit);
                 event.stopPropagation();
             }
             habitDetails.appendChild(editButton);
@@ -366,6 +366,7 @@ window.viewHabits = async function () {
             deleteButton.onclick = function (event) {
                 // Delete habit logic
                 console.log("Delete habit", doc.id);
+                deleteHabit(doc.id)
                 event.stopPropagation();
             }
             habitDetails.appendChild(deleteButton);
