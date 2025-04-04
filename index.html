@@ -56,6 +56,25 @@
             <button id="create-challenge">Create Challenge</button>
         </section>
 
+        <section id="createChallenge" class="create-challenge">
+            <h2>Create a Challenge</h2>
+            <form id="challenge-form" onsubmit="createChallenge(event)">
+                <label for="challenge-name">Challenge Name</label>
+                <input type="text" id="challenge-name" name="challenge-name" required>
+
+                <label for="challenge-description">Description</label>
+                <textarea id="challenge-description" name="challenge-description"></textarea>
+
+                <label for="challenge-start-date">Start Date</label>
+                <input type="date" id="challenge-start-date" name="challenge-start-date" required>
+
+                <label for="challenge-end-date">End Date</label>
+                <input type="date" id="challenge-end-date" name="challenge-end-date" required>
+
+                <button type="submit">Create Challenge</button>
+            </form>
+        </section>
+
         <section id="addHabit" class="habit-form">
             <h2>Add a New Habit</h2>
             <form id="habit-form" onsubmit="addHabit(event)">

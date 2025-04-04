@@ -113,6 +113,7 @@ window.navigation = {
     viewHabits: document.getElementById('viewHabits'),
     community: document.getElementById('community'),
     challenges: document.getElementById('challenges'),
+    createChallenges: document.getElementById('createChallenge'),
     addHabit: document.getElementById('addHabit'),
     profile: document.getElementById('profile'),
     notifications: document.getElementById('notifications'),
@@ -121,6 +122,7 @@ window.navigation = {
         this.viewHabits.style.display = "none";
         this.community.style.display = "none";
         this.challenges.style.display = "none";
+        this.createChallenges.style.display = "none";
         this.addHabit.style.display = "none";
         this.profile.style.display = "none";
         this.notifications.style.display = "none";
@@ -140,6 +142,10 @@ window.navigation = {
     showChallenges: function () {
         this.hideAll();
         this.challenges.style.display = "";
+    },
+    showCreateChallenges: function () {
+        this.hideAll();
+        this.createChallenges.style.display = "";
     },
     showAddHabit: function () {
         this.hideAll();
