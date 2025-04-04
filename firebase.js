@@ -598,6 +598,39 @@ window.showDashboard = async function () {
     })
 
     categoryDashboard.appendChild(streakDiv);
+
+
+    const goalDiv = document.createElement("div");
+    goalDiv.classList.add("streakDashboard");
+
+    querySnapshot.forEach((doc) => {
+        const habit = doc.data();
+
+        if (habit.userId === user) {
+            const goalCard = document.createElement("div");
+            goalCard.classList.add("streakCard");
+
+            const name = document.createElement("div");
+            name.innerText = habit.name;
+            goalCard.appendChild(name);
+
+            const img = document.createElement('img');
+            img.src = 'images/trophy.png';
+            img.alt = 'Trophy';
+            img.style.width = "84px";
+            goalCard.appendChild(img);
+
+            const logAndGoal = document.createElement("span");
+            logAndGoal.style.fontSize = "72px";
+            logAndGoal.innerText = habit.log + '/' + habit.goal;
+
+            goalCard.appendChild(logAndGoal);
+
+            goalDiv.appendChild(goalCard);
+        }
+    })
+
+    categoryDashboard.appendChild(goalDiv);
 }
 
 function getDaysFromCreated(createdAt) {
