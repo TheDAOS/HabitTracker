@@ -165,6 +165,9 @@ window.indexLoad = function () {
 function refreshData() {
     viewHabits();
     showDashboard();
+    showChallenges();
+    // showCommunity();
+    // showProfile();
 }
 
 window.addHabit = function (event) {
@@ -693,4 +696,33 @@ window.CreateChallenges = async function (habitID, habitData) {
             console.error("Error adding challenge: ", error);
             alert("Error adding challenge");
         });
+}
+
+window.showChallenges = async function () {
+    const challengesList = document.getElementById('challenges-list');
+    challengesList.innerHTML = ``;
+    const challengesRef = collection(db, "challenges");
+    const querySnapshot = await getDocs(challengesRef);
+    const user = auth.currentUser.uid;
+
+    querySnapshot.forEach((doc) => {
+        const challenge = doc.data();
+        const challengeCard = document.createElement('div');
+        challengeCard.className = "Habits";
+
+        const name = document.createElement('h3');
+        name.innerText = challenge.name;
+        challengeCard.appendChild(name);
+
+        const participants = document.createElement('p');
+        participants.innerText = `Participants: ${challenge.participants.length}`;
+        challengeCard.appendChild(participants);
+
+        const createdAt = document.createElement('p');
+        createdAt.innerText = `Created At: ${challenge.createdAt.toDate().toLocaleDateString()}`;
+        challengeCard.appendChild(createdAt);
+
+        challengesList.appendChild(challengeCard);
+    });
+    // navigation.showChallenges();
 }
