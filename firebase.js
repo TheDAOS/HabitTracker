@@ -687,6 +687,7 @@ window.CreateChallenges = async function (habitID, habitData) {
         name: habitData.name + " Challenge",
         template: habitData,
         createdAt: new Date(),
+        endAt: new Date(new Date().setDate(new Date().getDate() + 7)), // 7 days from now
     })
         .then(() => {
             alert("Challenge created successfully");
@@ -721,6 +722,10 @@ window.showChallenges = async function () {
         const createdAt = document.createElement('p');
         createdAt.innerText = `Created At: ${challenge.createdAt.toDate().toLocaleDateString()}`;
         challengeCard.appendChild(createdAt);
+
+        const endAt = document.createElement('p');
+        endAt.innerText = `Ends At: ${challenge.endAt.toDate().toLocaleDateString()}`;
+        challengeCard.appendChild(endAt);
 
         challengesList.appendChild(challengeCard);
     });
