@@ -744,7 +744,7 @@ window.createChallenge = async function (event) {
     const user = auth.currentUser.uid;
     try {
 
-        if (challengeId !== "") {
+        if (challengeId === "") {
 
             await addDoc(userRef, {
                 createdBy: user,
