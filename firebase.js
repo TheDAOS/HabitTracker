@@ -744,33 +744,66 @@ window.createChallenge = async function (event) {
     const user = auth.currentUser.uid;
     try {
 
-        await addDoc(userRef, {
-            createdBy: user,
-            participants: [user],
-            name: challengeName,
-            template: {
-                name: habitName,
-                description: habitDescription,
-                category: habitCategory,
-                type: habitType,
-                difficulty: habitDifficulty,
-                createdAt: new Date(),
-                lastUpdated: new Date(),
-                streak: 0,
-                totalCompleted: 0,
-                goal: habitGoal * 1,
-                log: 0,
-                history: [],
-                reminder: (habitReminder) ? {
-                    frequency: habitReminderTime,
-                    days: checkedDays,
-                } : false,
-            },
-            createdAt: new Date(startDate),
-            endAt: new Date(endDate),
-        })
+        if (challengeId !== "") {
 
-        alert("Challenge created successfully");
+            await addDoc(userRef, {
+                createdBy: user,
+                participants: [user],
+                name: challengeName,
+                template: {
+                    name: habitName,
+                    description: habitDescription,
+                    category: habitCategory,
+                    type: habitType,
+                    difficulty: habitDifficulty,
+                    createdAt: new Date(),
+                    lastUpdated: new Date(),
+                    streak: 0,
+                    totalCompleted: 0,
+                    goal: habitGoal * 1,
+                    log: 0,
+                    history: [],
+                    reminder: (habitReminder) ? {
+                        frequency: habitReminderTime,
+                        days: checkedDays,
+                    } : false,
+                },
+                createdAt: new Date(startDate),
+                endAt: new Date(endDate),
+            })
+
+            alert("Challenge created successfully");
+
+        } else {
+            const challengeRef = doc(userRef, challengeId);
+
+            await updateDoc(challengeRef, {
+                name: challengeName,
+                template: {
+                    name: habitName,
+                    description: habitDescription,
+                    category: habitCategory,
+                    type: habitType,
+                    difficulty: habitDifficulty,
+                    lastUpdated: new Date(),
+                    streak: 0,
+                    totalCompleted: 0,
+                    goal: habitGoal * 1,
+                    log: 0,
+                    history: [],
+                    reminder: (habitReminder) ? {
+                        frequency: habitReminderTime,
+                        days: checkedDays,
+                    } : false,
+                },
+                // createdAt: new Date(startDate),
+                // endAt: new Date(endDate),
+            })
+
+            alert("Challenge updated successfully");
+
+        }
+
         refreshData();
         navigation.showChallenges();
 
