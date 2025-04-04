@@ -350,12 +350,21 @@ window.viewHabits = async function () {
             reminder.innerText = `Reminder: ${habit.reminder ? "Yes" : "No"}`;
             habitDetails.appendChild(reminder);
 
+            const CreateChallengesButton = document.createElement('button');
+            CreateChallengesButton.innerText = "Create from this Challenges";
+            CreateChallengesButton.style.marginRight = "10px";
+            CreateChallengesButton.onclick = function (event) {
+                CreateChallenges(doc.id, habit);
+                event.stopPropagation();
+            }
+            habitDetails.appendChild(CreateChallengesButton);
+
             const editButton = document.createElement('button');
             editButton.innerText = "Edit";
             editButton.style.marginRight = "10px";
             editButton.onclick = function (event) {
                 // Edit habit logic
-                console.log("Edit habit", doc.id);
+                // console.log("Edit habit", doc.id);
                 editHabit(doc.id, habit);
                 event.stopPropagation();
             }
@@ -365,7 +374,7 @@ window.viewHabits = async function () {
             deleteButton.innerText = "Delete";
             deleteButton.onclick = function (event) {
                 // Delete habit logic
-                console.log("Delete habit", doc.id);
+                // console.log("Delete habit", doc.id);
                 deleteHabit(doc.id)
                 event.stopPropagation();
             }
@@ -408,14 +417,14 @@ async function logHabit(habitId, habitData) {
     }
 
 
-    console.log(
-        log,
-        history,
-        streak,
-        totalCompleted,
-        areDatesOnSameDayOfWeek(history[history.length - 1]),
-        history[history.length - 1],
-    )
+    // console.log(
+    //     log,
+    //     history,
+    //     streak,
+    //     totalCompleted,
+    //     areDatesOnSameDayOfWeek(history[history.length - 1]),
+    //     history[history.length - 1],
+    // )
 
     updateDoc(habitRef, {
         totalCompleted: totalCompleted,
@@ -425,7 +434,7 @@ async function logHabit(habitId, habitData) {
         lastUpdated: new Date()
     })
         .then(() => {
-            console.log("Habit logged successfully");
+            // console.log("Habit logged successfully");
             refreshData();
         })
         .catch((error) => {
@@ -472,7 +481,7 @@ function deleteHabit(habitId) {
 
     deleteDoc(habitRef)
         .then(() => {
-            console.log("Habit deleted successfully");
+            // console.log("Habit deleted successfully");
             refreshData();
         })
         .catch((error) => {
@@ -666,3 +675,6 @@ function getDaysFromCreated(createdAt) {
     return diffDays + 1;
 }
 
+window.CreateChallenges = async function () {
+    console.log("hello");
+}

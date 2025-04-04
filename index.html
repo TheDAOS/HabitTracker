@@ -53,13 +53,14 @@
             <h2>Challenges</h2>
             <div id="challenges-list"></div>
             <button id="join-challenge">Join Challenge</button>
+            <button id="create-challenge">Create Challenge</button>
         </section>
 
         <section id="addHabit" class="habit-form">
             <h2>Add a New Habit</h2>
             <form id="habit-form" onsubmit="addHabit(event)">
 
-                <input type="text" id="habitID" name="habitID" >
+                <input type="text" id="habitID" name="habitID" hidden>
 
                 <label for="habit-name">Habit Name</label>
                 <input type="text" id="habit-name" name="habit-name" required>
