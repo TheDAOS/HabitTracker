@@ -681,10 +681,11 @@ function getDaysFromCreated(createdAt) {
 
 window.CreateChallenges = async function (habitID, habitData) {
     const challengesRef = collection(db, "challenges");
+    const user = auth.currentUser.uid;
 
     addDoc(challengesRef, {
-        createdBy: auth.currentUser.uid,
-        participants: [habitID],
+        createdBy: user,
+        participants: [user],
         name: habitData.name + " Challenge",
         template: habitData,
         createdAt: new Date(),
