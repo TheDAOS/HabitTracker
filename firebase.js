@@ -708,6 +708,18 @@ window.createChallengesFromHabit = async function (habitID, habitData) {
         });
 }
 
+window.createChallenge = async function (event) {
+    event.preventDefault();
+
+    const challengeName = document.getElementById('challenge-name').value;
+    const challengeDescription = document.getElementById('challenge-description').value;
+    const startDate = document.getElementById('start-date').value;
+    const endDate = document.getElementById('end-date').value;
+
+    
+
+}
+
 window.showChallenges = async function () {
     const challengesList = document.getElementById('challenges-list');
     challengesList.innerHTML = ``;
