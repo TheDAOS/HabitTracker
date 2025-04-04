@@ -710,22 +710,123 @@ window.showChallenges = async function () {
         const challenge = doc.data();
         const challengeCard = document.createElement('div');
         challengeCard.className = "Habits";
+        challengeCard.onclick = function () {
+            if (challengeDetails.style.display === "none") {
+                challengeDetails.style.display = "block";
+            } else {
+                challengeDetails.style.display = "none";
+            }
+        }
+        const compactDIV = document.createElement('div');
+        compactDIV.className = "compactDIV";
+        compactDIV.style.display = "flex";
+        compactDIV.style.flexDirection = "row";
+        compactDIV.style.justifyContent = "space-between";
+        compactDIV.style.alignItems = "center";
+        compactDIV.style.gap = "10px";
+
+        const div1 = document.createElement('div');
+        div1.className = 'compactDIV';
 
         const name = document.createElement('h3');
         name.innerText = challenge.name;
-        challengeCard.appendChild(name);
+        div1.appendChild(name);
 
         const participants = document.createElement('p');
         participants.innerText = `Participants: ${challenge.participants.length}`;
-        challengeCard.appendChild(participants);
+        div1.appendChild(participants);
 
         const createdAt = document.createElement('p');
         createdAt.innerText = `Created At: ${challenge.createdAt.toDate().toLocaleDateString()}`;
-        challengeCard.appendChild(createdAt);
+        div1.appendChild(createdAt);
 
         const endAt = document.createElement('p');
         endAt.innerText = `Ends At: ${challenge.endAt.toDate().toLocaleDateString()}`;
-        challengeCard.appendChild(endAt);
+        div1.appendChild(endAt);
+
+        compactDIV.appendChild(div1);
+
+        const div2 = document.createElement('div');
+
+        const joinButton = document.createElement('button');
+        joinButton.innerText = "Join";
+        joinButton.style.marginRight = "10px";
+        joinButton.onclick = function (event) {
+            // Join challenge logic
+            // console.log("Join challenge", doc.id);
+            joinChallenge(doc.id, challenge);
+            event.stopPropagation();
+        }
+        div2.appendChild(joinButton);
+
+        compactDIV.appendChild(div2);
+
+        challengeCard.appendChild(compactDIV);
+
+
+
+        const challengeDetails = document.createElement('div');
+        challengeDetails.style.display = "none";
+
+        const message = document.createElement('p');
+        message.innerText = "Challenge Details";
+        message.style.fontSize = "20px";
+        message.style.fontWeight = "bold";
+        challengeDetails.appendChild(message);
+
+        const description = document.createElement('p');
+        description.innerText = challenge.template.description;
+        challengeDetails.appendChild(description);
+
+        const category = document.createElement('p');
+        category.innerText = `Category: ${challenge.template.category}`;
+        challengeDetails.appendChild(category);
+
+        const type = document.createElement('p');
+        type.innerText = `Type: ${challenge.template.type}`;
+        challengeDetails.appendChild(type);
+
+        const difficulty = document.createElement('p');
+        difficulty.innerText = `Difficulty: ${challenge.template.difficulty}`;
+        challengeDetails.appendChild(difficulty);
+
+        const goal = document.createElement('p');
+        goal.innerText = `Goal: ${challenge.template.goal}`;
+        challengeDetails.appendChild(goal);
+
+        const reminder = document.createElement('p');
+        reminder.innerText = `Reminder: ${challenge.template.reminder ? "Yes" : "No"}`;
+        challengeDetails.appendChild(reminder);
+
+        const challengeModifications = document.createElement('div');
+        challengeModifications.style.display = "flex";
+        challengeModifications.style.gap = "10px";
+
+        const editButton = document.createElement('button');
+        editButton.innerText = "Edit";
+        editButton.style.marginRight = "5px";
+        editButton.onclick = function (event) {
+            // Edit challenge logic
+            // console.log("Edit challenge", doc.id);
+            editChallenge(doc.id, challenge);
+            event.stopPropagation();
+        }
+        challengeModifications.appendChild(editButton);
+
+        const deleteButton = document.createElement('button');
+        deleteButton.innerText = "Delete";
+        deleteButton.onclick = function (event) {
+            // Delete challenge logic
+            // console.log("Delete challenge", doc.id);
+            deleteChallenge(doc.id)
+            event.stopPropagation();
+        }
+
+        challengeModifications.appendChild(deleteButton);
+
+        challengeDetails.appendChild(challengeModifications);
+
+        challengeCard.appendChild(challengeDetails);
 
         challengesList.appendChild(challengeCard);
     });

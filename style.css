@@ -375,6 +375,9 @@ input[type="checkbox"] {
     font-weight: bold;
 }
 
+.compactDIV > * {
+    margin: 0;
+}
 
 @media screen and (max-width: 1230px) {
     header {
