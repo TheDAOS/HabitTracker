@@ -682,11 +682,6 @@ window.CreateChallenges = async function (habitID, habitData) {
         createdBy: auth.currentUser.uid,
         participants: [ habitID ],
         name: habitData.name + " Challenge",
-        description: habitData.description,
-        category: habitData.category,
-        type: habitData.type,
-        difficulty: habitData.difficulty,
-        goal: habitData.goal * 1,
         template: habitData,
         createdAt: new Date(),
     })
