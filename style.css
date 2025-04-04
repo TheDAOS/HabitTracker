@@ -379,6 +379,10 @@ input[type="checkbox"] {
     margin: 0;
 }
 
+#challenge-form{
+    gap: 10px;
+}
+
 @media screen and (max-width: 1230px) {
     header {
         flex-direction: column;
