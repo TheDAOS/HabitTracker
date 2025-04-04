@@ -71,6 +71,65 @@
                 <label for="challenge-end-date">End Date</label>
                 <input type="date" id="challenge-end-date" name="challenge-end-date" required>
 
+                <h4>Habit Template</h4>
+
+                <input type="text" id="habitID" name="habitID" hidden>
+
+                <label for="habit-name">Habit Name</label>
+                <input type="text" id="habit-name" name="habit-name" required>
+
+                <label for="habit-description">Description</label>
+                <textarea id="habit-description" name="habit-description"></textarea>
+
+                <label for="habit-category">Category</label>
+                <select id="habit-category" name="habit-category" required>
+                    <option value="health">Health</option>
+                    <option value="productivity">Productivity</option>
+                    <option value="lifestyle">Lifestyle</option>
+                    <option value="learning">Learning</option>
+                    <option value="social">Social</option>
+                    <option value="other">Other</option>
+                </select>
+
+                <label for="type">Type</label>
+                <select id="type" name="type" required>
+                    <option value="daily">Daily</option>
+                    <option value="weekly">Weekly</option>
+                    <option value="monthly">Monthly</option>
+                    <option value="yearly">Yearly</option>
+                </select>
+
+                <label for="difficulty">Difficulty</label>
+                <select id="difficulty" name="difficulty" required>
+                    <option value="easy">Easy</option>
+                    <option value="medium">Medium</option>
+                    <option value="hard">Hard</option>
+                </select>
+
+                <label for="goal">Goal</label>
+                <input type="number" id="goal" name="goal" placeholder="e.g., total miles to run in a month" required>
+
+                <div>
+                    <label for="reminders">Reminders</label>
+                    <input type="checkbox" id="reminders" name="reminders">
+                </div>
+
+                <div>
+                    <label for="reminder-time">Reminder Time</label>
+                    <input type="time" id="reminder-time" name="reminder-time">
+                </div>
+
+
+                <label for="days">Reminder frequency</label>
+                <div><input type="checkbox" class="day" name="days" value="Sunday"> Sunday</div>
+                <div><input type="checkbox" class="day" name="days" value="Monday"> Monday</div>
+                <div><input type="checkbox" class="day" name="days" value="Tuesday"> Tuesday</div>
+                <div><input type="checkbox" class="day" name="days" value="Wednesday"> Wednesday</div>
+                <div><input type="checkbox" class="day" name="days" value="Thursday"> Thursday</div>
+                <div><input type="checkbox" class="day" name="days" value="Friday"> Friday</div>
+                <div><input type="checkbox" class="day" name="days" value="Saturday"> Saturday</div>
+
+
                 <button type="submit">Create Challenge</button>
             </form>
         </section>
