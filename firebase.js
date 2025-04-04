@@ -549,6 +549,7 @@ window.showDashboard = async function () {
 
         const label = document.createElement("label");
         label.textContent = key;
+        label.style.fontWeight = "bold";
 
         const progressBar = document.createElement("div");
         const progress = document.createElement("div");
@@ -683,7 +684,7 @@ window.CreateChallenges = async function (habitID, habitData) {
 
     addDoc(challengesRef, {
         createdBy: auth.currentUser.uid,
-        participants: [ habitID ],
+        participants: [habitID],
         name: habitData.name + " Challenge",
         template: habitData,
         createdAt: new Date(),
@@ -798,37 +799,94 @@ window.showChallenges = async function () {
         reminder.innerText = `Reminder: ${challenge.template.reminder ? "Yes" : "No"}`;
         challengeDetails.appendChild(reminder);
 
-        const challengeModifications = document.createElement('div');
-        challengeModifications.style.display = "flex";
-        challengeModifications.style.gap = "10px";
+        if (challenge.createdBy === user) {
+            const challengeModifications = document.createElement('div');
+            challengeModifications.style.display = "flex";
+            challengeModifications.style.gap = "10px";
 
-        const editButton = document.createElement('button');
-        editButton.innerText = "Edit";
-        editButton.style.marginRight = "5px";
-        editButton.onclick = function (event) {
-            // Edit challenge logic
-            // console.log("Edit challenge", doc.id);
-            editChallenge(doc.id, challenge);
-            event.stopPropagation();
+            const editButton = document.createElement('button');
+            editButton.innerText = "Edit";
+            editButton.style.marginRight = "5px";
+            editButton.onclick = function (event) {
+                // Edit challenge logic
+                // console.log("Edit challenge", doc.id);
+                editChallenge(doc.id, challenge);
+                event.stopPropagation();
+            }
+            challengeModifications.appendChild(editButton);
+
+            const deleteButton = document.createElement('button');
+            deleteButton.innerText = "Delete";
+            deleteButton.onclick = function (event) {
+                // Delete challenge logic
+                // console.log("Delete challenge", doc.id);
+                deleteChallenge(doc.id)
+                event.stopPropagation();
+            }
+
+            challengeModifications.appendChild(deleteButton);
+
+
+            challengeDetails.appendChild(challengeModifications);
         }
-        challengeModifications.appendChild(editButton);
-
-        const deleteButton = document.createElement('button');
-        deleteButton.innerText = "Delete";
-        deleteButton.onclick = function (event) {
-            // Delete challenge logic
-            // console.log("Delete challenge", doc.id);
-            deleteChallenge(doc.id)
-            event.stopPropagation();
-        }
-
-        challengeModifications.appendChild(deleteButton);
-
-        challengeDetails.appendChild(challengeModifications);
 
         challengeCard.appendChild(challengeDetails);
 
         challengesList.appendChild(challengeCard);
     });
     // navigation.showChallenges();
+}
+
+async function joinChallenge(challengeId, challengeData) {
+    const challengesRef = collection(db, "challenges");
+    const challengeRef = doc(challengesRef, challengeId);
+
+    let user = auth.currentUser.uid;
+
+    if (challengeData.participants.indexOf(user) !== -1) {
+        alert("You are already a participant in this challenge");
+        return;
+    }
+
+    let participants = challengeData.participants;
+    participants.push(user);
+
+    try {
+
+        // Add the habit to the user's habits collection
+        const habitRef = collection(db, "habits");
+
+        await addDoc(habitRef, {
+            userId: user,
+            name: challengeData.template.name,
+            description: challengeData.template.description,
+            category: challengeData.template.category,
+            type: challengeData.template.type,
+            difficulty: challengeData.template.difficulty,
+            createdAt: new Date(),
+            lastUpdated: new Date(),
+            streak: 0,
+            totalCompleted: 0,
+            goal: challengeData.template.goal * 1,
+            log: 0,
+            history: [],
+            reminder: (challengeData.template.reminder) ? {
+                frequency: challengeData.template.reminder.frequency,
+                days: challengeData.template.reminder.days,
+            } : false,
+        })
+
+
+        // Update the challenge document with the new participant
+        await updateDoc(challengeRef, {
+            participants: participants,
+            lastUpdated: new Date()
+        })
+
+        alert("Challenge joined successfully");
+        refreshData();
+
+    } catch (error) {
+        console.error("Error joining challenge: ", error);
+    }
 }
