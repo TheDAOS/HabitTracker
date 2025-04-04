@@ -58,11 +58,11 @@
         <section id="createChallenge" class="create-challenge">
             <h2>Create a Challenge</h2>
             <form id="challenge-form" onsubmit="createChallenge(event)">
+
+                <input type="text" id="challengeID" name="challengeID" hidden>
+
                 <label for="challenge-name">Challenge Name</label>
                 <input type="text" id="challenge-name" name="challenge-name" required>
-
-                <label for="challenge-description">Description</label>
-                <textarea id="challenge-description" name="challenge-description"></textarea>
 
                 <label for="challenge-start-date">Start Date</label>
                 <input type="date" id="challenge-start-date" name="challenge-start-date" required>
@@ -73,16 +73,14 @@
 
                 <h4>Habit Template</h4>
 
-                <input type="text" id="habitID" name="habitID" hidden>
+                <label for="template-habit-name">Habit Name</label>
+                <input type="text" id="template-habit-name" name="template-habit-name" required>
 
-                <label for="habit-name">Habit Name</label>
-                <input type="text" id="habit-name" name="habit-name" required>
+                <label for="template-habit-description">Description</label>
+                <textarea id="template-habit-description" name="template-habit-description"></textarea>
 
-                <label for="habit-description">Description</label>
-                <textarea id="habit-description" name="habit-description"></textarea>
-
-                <label for="habit-category">Category</label>
-                <select id="habit-category" name="habit-category" required>
+                <label for="template-habit-category">Category</label>
+                <select id="template-habit-category" name="template-habit-category" required>
                     <option value="health">Health</option>
                     <option value="productivity">Productivity</option>
                     <option value="lifestyle">Lifestyle</option>
@@ -91,42 +89,43 @@
                     <option value="other">Other</option>
                 </select>
 
-                <label for="type">Type</label>
-                <select id="type" name="type" required>
+                <label for="template-type">Type</label>
+                <select id="template-type" name="template-type" required>
                     <option value="daily">Daily</option>
                     <option value="weekly">Weekly</option>
                     <option value="monthly">Monthly</option>
                     <option value="yearly">Yearly</option>
                 </select>
 
-                <label for="difficulty">Difficulty</label>
-                <select id="difficulty" name="difficulty" required>
+                <label for="template-difficulty">Difficulty</label>
+                <select id="template-difficulty" name="template-difficulty" required>
                     <option value="easy">Easy</option>
                     <option value="medium">Medium</option>
                     <option value="hard">Hard</option>
                 </select>
 
-                <label for="goal">Goal</label>
-                <input type="number" id="goal" name="goal" placeholder="e.g., total miles to run in a month" required>
+                <label for="template-goal">Goal</label>
+                <input type="number" id="template-goal" name="template-goal"
+                    placeholder="e.g., total miles to run in a month" required>
 
                 <div>
-                    <label for="reminders">Reminders</label>
-                    <input type="checkbox" id="reminders" name="reminders">
+                    <label for="template-reminders">Reminders</label>
+                    <input type="checkbox" id="template-reminders" name="template-reminders">
                 </div>
 
                 <div>
-                    <label for="reminder-time">Reminder Time</label>
-                    <input type="time" id="reminder-time" name="reminder-time">
+                    <label for="template-reminder-time">Reminder Time</label>
+                    <input type="time" id="template-reminder-time" name="template-reminder-time">
                 </div>
 
-                <label for="days">Reminder frequency</label>
-                <div><input type="checkbox" class="day" name="days" value="Sunday"> Sunday</div>
-                <div><input type="checkbox" class="day" name="days" value="Monday"> Monday</div>
-                <div><input type="checkbox" class="day" name="days" value="Tuesday"> Tuesday</div>
-                <div><input type="checkbox" class="day" name="days" value="Wednesday"> Wednesday</div>
-                <div><input type="checkbox" class="day" name="days" value="Thursday"> Thursday</div>
-                <div><input type="checkbox" class="day" name="days" value="Friday"> Friday</div>
-                <div><input type="checkbox" class="day" name="days" value="Saturday"> Saturday</div>
+                <label for="template-days">Reminder frequency</label>
+                <div><input type="checkbox" class="day" name="template-days" value="Sunday"> Sunday</div>
+                <div><input type="checkbox" class="day" name="template-days" value="Monday"> Monday</div>
+                <div><input type="checkbox" class="day" name="template-days" value="Tuesday"> Tuesday</div>
+                <div><input type="checkbox" class="day" name="template-days" value="Wednesday"> Wednesday</div>
+                <div><input type="checkbox" class="day" name="template-days" value="Thursday"> Thursday</div>
+                <div><input type="checkbox" class="day" name="template-days" value="Friday"> Friday</div>
+                <div><input type="checkbox" class="day" name="template-days" value="Saturday"> Saturday</div>
 
                 <button type="submit">Create Challenge</button>
                 <input type="reset" value="Cancel and Reset">

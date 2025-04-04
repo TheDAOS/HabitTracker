@@ -711,8 +711,8 @@ window.createChallengesFromHabit = async function (habitID, habitData) {
 window.createChallenge = async function (event) {
     event.preventDefault();
 
+    const challengeId = document.getElementById('challengeID').value;
     const challengeName = document.getElementById('challenge-name').value;
-    const challengeDescription = document.getElementById('challenge-description').value;
     const startDate = document.getElementById('start-date').value;
     const endDate = document.getElementById('end-date').value;
 
@@ -773,7 +773,7 @@ window.createChallenge = async function (event) {
         alert("Challenge created successfully");
         refreshData();
         navigation.showChallenges();
-        
+
     } catch (error) {
         console.error("Error adding challenge: ", error);
         alert("Error adding challenge");
@@ -969,6 +969,10 @@ async function joinChallenge(challengeId, challengeData) {
     } catch (error) {
         console.error("Error joining challenge: ", error);
     }
+}
+
+async function editChallenge(challengeId, challengeData) {
+    console.log("ad");
 }
 
 async function deleteChallenge(challengeId) {
