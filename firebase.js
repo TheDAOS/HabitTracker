@@ -972,7 +972,40 @@ async function joinChallenge(challengeId, challengeData) {
 }
 
 async function editChallenge(challengeId, challengeData) {
-    console.log("ad");
+    document.getElementById('challengeID').value = challengeId;
+    document.getElementById('challenge-name').value = challengeData.name;
+
+    document.getElementById('start-date').value = challengeData.createdAt.toDate().toISOString().split("T")[0];
+    document.getElementById('end-date').value = challengeData.endAt.toDate().toISOString().split("T")[0];
+
+    document.getElementById('habit-name').value = challengeData.template.name;
+    document.getElementById('habit-description').value = challengeData.template.description;
+    document.getElementById('habit-category').value = challengeData.template.category;
+    document.getElementById('type').value = challengeData.template.type;
+    document.getElementById('difficulty').value = challengeData.template.difficulty;
+    document.getElementById('goal').value = challengeData.template.goal;
+    if (challengeData.template.reminder === false) {
+        document.getElementById('reminders').checked = false;
+    } else {
+        document.getElementById('reminders').checked = true;
+        document.getElementById('reminder-time').value = challengeData.template.reminder.frequency;
+        const checkboxes = document.querySelectorAll('.day');
+
+        const weekdays = [
+            "Sunday", "Monday",
+            "Tuesday", "Wednesday",
+            "Thursday", "Friday", "Saturday"
+        ];
+
+        checkboxes.forEach((checkbox, i) => {
+            if (challengeData.template.reminder.days.indexOf(i) !== -1) {
+                checkbox.checked = true;
+            } else {
+                checkbox.checked = false;
+            }
+        });
+    }
+    navigation.showCreateChallenges();
 }
 
 async function deleteChallenge(challengeId) {
