@@ -891,3 +891,17 @@ async function joinChallenge(challengeId, challengeData) {
         console.error("Error joining challenge: ", error);
     }
 }
+
+async function deleteChallenge(challengeId) {
+    const challengesRef = collection(db, "challenges");
+    const challengeRef = doc(challengesRef, challengeId);
+
+    deleteDoc(challengeRef)
+        .then(() => {
+            // console.log("Challenge deleted successfully");
+            refreshData();
+        })
+        .catch((error) => {
+            console.error("Error deleting challenge: ", error);
+        });
+}
