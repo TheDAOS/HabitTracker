@@ -713,19 +713,19 @@ window.createChallenge = async function (event) {
 
     const challengeId = document.getElementById('challengeID').value;
     const challengeName = document.getElementById('challenge-name').value;
-    const startDate = document.getElementById('start-date').value;
-    const endDate = document.getElementById('end-date').value;
+    const startDate = document.getElementById('challenge-start-date').value;
+    const endDate = document.getElementById('challenge-end-date').value;
 
     // habit template
-    const habitName = document.getElementById('habit-name').value;
-    const habitDescription = document.getElementById('habit-description').value;
-    const habitCategory = document.getElementById('habit-category').value;
-    const habitType = document.getElementById('type').value;
-    const habitDifficulty = document.getElementById('difficulty').value;
-    const habitGoal = document.getElementById('goal').value;
-    const habitReminder = document.getElementById('reminders').checked;
-    const habitReminderTime = document.getElementById('reminder-time').value;
-    const checkboxes = document.querySelectorAll('.day');
+    const habitName = document.getElementById('template-habit-name').value;
+    const habitDescription = document.getElementById('template-habit-description').value;
+    const habitCategory = document.getElementById('template-habit-category').value;
+    const habitType = document.getElementById('template-type').value;
+    const habitDifficulty = document.getElementById('template-difficulty').value;
+    const habitGoal = document.getElementById('template-goal').value;
+    const habitReminder = document.getElementById('template-reminders').checked;
+    const habitReminderTime = document.getElementById('template-reminder-time').value;
+    const checkboxes = document.querySelectorAll('.template-day');
 
     const checkedDays = [];
     const weekdays = [
