@@ -975,27 +975,21 @@ async function editChallenge(challengeId, challengeData) {
     document.getElementById('challengeID').value = challengeId;
     document.getElementById('challenge-name').value = challengeData.name;
 
-    document.getElementById('start-date').value = challengeData.createdAt.toDate().toISOString().split("T")[0];
-    document.getElementById('end-date').value = challengeData.endAt.toDate().toISOString().split("T")[0];
+    document.getElementById('challenge-start-date').value = challengeData.createdAt.toDate().toISOString().split("T")[0];
+    document.getElementById('challenge-end-date').value = challengeData.endAt.toDate().toISOString().split("T")[0];
 
-    document.getElementById('habit-name').value = challengeData.template.name;
-    document.getElementById('habit-description').value = challengeData.template.description;
-    document.getElementById('habit-category').value = challengeData.template.category;
-    document.getElementById('type').value = challengeData.template.type;
-    document.getElementById('difficulty').value = challengeData.template.difficulty;
-    document.getElementById('goal').value = challengeData.template.goal;
+    document.getElementById('challenge-habit-name').value = challengeData.template.name;
+    document.getElementById('challenge-habit-description').value = challengeData.template.description;
+    document.getElementById('challenge-habit-category').value = challengeData.template.category;
+    document.getElementById('challenge-type').value = challengeData.template.type;
+    document.getElementById('challenge-difficulty').value = challengeData.template.difficulty;
+    document.getElementById('challenge-goal').value = challengeData.template.goal;
     if (challengeData.template.reminder === false) {
-        document.getElementById('reminders').checked = false;
+        document.getElementById('challenge-reminders').checked = false;
     } else {
-        document.getElementById('reminders').checked = true;
-        document.getElementById('reminder-time').value = challengeData.template.reminder.frequency;
-        const checkboxes = document.querySelectorAll('.day');
-
-        const weekdays = [
-            "Sunday", "Monday",
-            "Tuesday", "Wednesday",
-            "Thursday", "Friday", "Saturday"
-        ];
+        document.getElementById('challenge-reminders').checked = true;
+        document.getElementById('challenge-reminder-time').value = challengeData.template.reminder.frequency;
+        const checkboxes = document.querySelectorAll('.template-days');
 
         checkboxes.forEach((checkbox, i) => {
             if (challengeData.template.reminder.days.indexOf(i) !== -1) {
