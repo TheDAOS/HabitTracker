@@ -14,6 +14,7 @@ import {
     getDocs,
     updateDoc,
     doc,
+    deleteDoc,
 } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-firestore.js";
 
 const firebaseConfig = {
@@ -168,6 +169,7 @@ function refreshData() {
 
 window.addHabit = function (event) {
     event.preventDefault();
+    const habitID = document.getElementById('habitID').value;
     const habitName = document.getElementById('habit-name').value;
     const habitDescription = document.getElementById('habit-description').value;
     const habitCategory = document.getElementById('habit-category').value;
@@ -191,36 +193,63 @@ window.addHabit = function (event) {
         }
     });
 
-    // Add habit to Firestore
     const userRef = collection(db, "habits");
-    addDoc(userRef, {
-        userId: auth.currentUser.uid,
-        name: habitName,
-        description: habitDescription,
-        category: habitCategory,
-        type: habitType,
-        difficulty: habitDifficulty,
-        createdAt: new Date(),
-        lastUpdated: new Date(),
-        streak: 0,
-        totalCompleted: 0,
-        goal: habitGoal * 1,
-        log: 0,
-        history: [],
-        reminder: (habitReminder) ? {
-            frequency: habitReminderTime,
-            days: checkedDays,
-        } : false,
-    })
-        .then(() => {
-            alert("Habit added successfully");
-            // window.location.href = "index.html";
-            navigation.showViewHabits();
+
+    if (habitID === "") {
+        // Add habit to Firestore
+        addDoc(userRef, {
+            userId: auth.currentUser.uid,
+            name: habitName,
+            description: habitDescription,
+            category: habitCategory,
+            type: habitType,
+            difficulty: habitDifficulty,
+            createdAt: new Date(),
+            lastUpdated: new Date(),
+            streak: 0,
+            totalCompleted: 0,
+            goal: habitGoal * 1,
+            log: 0,
+            history: [],
+            reminder: (habitReminder) ? {
+                frequency: habitReminderTime,
+                days: checkedDays,
+            } : false,
         })
-        .catch((error) => {
-            console.error("Error adding habit: ", error);
-            alert("Error adding habit");
-        });
+            .then(() => {
+                alert("Habit added successfully");
+                // window.location.href = "index.html";
+                navigation.showViewHabits();
+            })
+            .catch((error) => {
+                console.error("Error adding habit: ", error);
+                alert("Error adding habit");
+            });
+    } else {
+        // Update habit in Firestore
+        const habitRef = doc(userRef, habitID);
+
+        updateDoc(habitRef, {
+            name: habitName,
+            description: habitDescription,
+            category: habitCategory,
+            type: habitType,
+            difficulty: habitDifficulty,
+            goal: habitGoal * 1,
+            reminder: (habitReminder) ? {
+                frequency: habitReminderTime,
+                days: checkedDays,
+            } : false,
+        })
+            .then(() => {
+                alert("Habit updated successfully");
+                navigation.showViewHabits();
+            })
+            .catch((error) => {
+                console.error("Error updating habit: ", error);
+                alert("Error updating habit");
+            });
+    }
 }
 
 window.viewHabits = async function () {
@@ -327,6 +356,7 @@ window.viewHabits = async function () {
             editButton.onclick = function (event) {
                 // Edit habit logic
                 console.log("Edit habit", doc.id);
+                editHabit(habit.userId, habit);
                 event.stopPropagation();
             }
             habitDetails.appendChild(editButton);
@@ -403,6 +433,7 @@ async function logHabit(habitId, habitData) {
 }
 
 async function editHabit(habitId, habitData) {
+    document.getElementById('habitID').value = habitId;
     document.getElementById('habit-name').value = habitData.name;
     document.getElementById('habit-description').value = habitData.description;
     document.getElementById('habit-category').value = habitData.category;
@@ -424,9 +455,29 @@ async function editHabit(habitId, habitData) {
         ];
 
         checkboxes.forEach((checkbox, i) => {
-            checkbox.value = weekdays[habitData.reminder.days[i]];
+            if (habitData.reminder.days.indexOf(i) !== -1) {
+                checkbox.checked = true;
+            } else {
+                checkbox.checked = false;
+            }
         });
     }
+    navigation.showAddHabit();
+}
+
+function deleteHabit(habitId) {
+    const userRef = collection(db, "habits");
+    const habitRef = doc(userRef, habitId);
+
+    deleteDoc(habitRef)
+        .then(() => {
+            console.log("Habit deleted successfully");
+            refreshData();
+        })
+        .catch((error) => {
+            console.error("Error deleting habit: ", error);
+        });
+
 }
 
 function areDatesOnSameDayOfWeek(date) {
