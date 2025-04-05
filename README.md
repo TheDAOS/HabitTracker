@@ -11,18 +11,18 @@ Frontend
 [GitHub Pages:](https://deployed-site.whatever)
 
 ## Directory Structure
-HabitTracker/
-├─ images/
-│  ├─ carret.png
-│  ├─ streak.png
-│  ├─ trophy.png
-├─ LICENSE
-├─ README.md
-├─ firebase.js
-├─ index.html
-├─ login.html
-├─ register.html
-├─ style.css
+HabitTracker/   
+├─ images/   
+│  ├─ carret.png   
+│  ├─ streak.png   
+│  ├─ trophy.png   
+├─ LICENSE   
+├─ README.md   
+├─ firebase.js    
+├─ index.html   
+├─ login.html   
+├─ register.html   
+├─ style.css   
 
 ## Video Walkthrough of the project
 Attach a very short video walkthough of all of the features [ 1 - 3 minutes ]
