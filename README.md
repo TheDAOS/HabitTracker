@@ -11,11 +11,24 @@ Frontend
 [GitHub Pages:](https://deployed-site.whatever)
 
 ## Directory Structure
-HabitTracker/   
+HabitTracker/
+├─ favicon_io/ 
+│  ├─ android-chrome-192x192.png   
+│  ├─ android-chrome-512x512.png   
+│  ├─ apple-touch-icon.png   
+│  ├─ favicon-16x16.png   
+│  ├─ favicon-32x32.png   
+│  ├─ favicon.ico   
+│  ├─ site.webmanifest   
 ├─ images/   
 │  ├─ carret.png   
 │  ├─ streak.png   
 │  ├─ trophy.png   
+├─ screenshots/   
+│  ├─ Challenges.png  
+│  ├─ Dashboard.png  
+│  ├─ Habits.png  
+│  ├─ Login_page.png  
 ├─ LICENSE   
 ├─ README.md   
 ├─ firebase.js    
@@ -54,7 +67,17 @@ Provide instructions and examples on how to use your project.
 # Example
 ```
 
-Include screenshots as necessary.
+- Login Page
+    ![Login](./screenshots/Login_page.png)
+
+- Dashboard
+    ![Dashboard](./screenshots/Dashboard.png)
+
+- Habits
+    ![Habits](./screenshots/Habits.png)
+
+- Challenges
+    ![Challenges](./screenshots/Challenges.png)
 
 ## Credentials
 name, email and password
