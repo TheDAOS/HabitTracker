@@ -11,9 +11,9 @@ Frontend
 [GitHub Pages:](https://deployed-site.whatever)
 
 ## Directory Structure
-HabitTracker/
-├─ favicon_io/ 
-│  ├─ android-chrome-192x192.png   
+HabitTracker/     
+├─ favicon_io/    
+│  ├─ android-chrome-192x192.png     
 │  ├─ android-chrome-512x512.png   
 │  ├─ apple-touch-icon.png   
 │  ├─ favicon-16x16.png   
